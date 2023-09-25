@@ -1,11 +1,13 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Roboto_Mono  } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs';
+import Navbar from '@/components/Navbar';
+import {cn} from "@/lib/utils";
 
-const font = Roboto_Mono({ 
+const font = Montserrat({ 
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400'],
 })
 
 export const metadata: Metadata = {
@@ -21,7 +23,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={font.className}>{children}</body>
+        <body className={cn(font.className, "min-h-screen")}>
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   )
