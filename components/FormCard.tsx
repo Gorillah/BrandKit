@@ -2,9 +2,9 @@
 
 import {Button} from '@/components/ui/button'
 import {useRouter} from 'next/navigation'
-import Style from "@/components/form-steps/Style"
-import Color from "@/components/form-steps/Color"
-import Font from "@/components/form-steps/Font"
+import Style from "@/components/form-steps/LogoStyle"
+import Color from "@/components/form-steps/ColorScheme"
+import Font from "@/components/form-steps/FontStyle"
 import { Progress } from '@/components/ui/progress';
 import React from 'react'
 import {useProgressBar} from '@/store/createLogo'
@@ -55,7 +55,7 @@ export default function FormCard() {
               if(page > 1) {
                 // REDIRECT TO LOGO PAGE
                 router.push('/logo/' + formData.id)
-                // SEND FORM DATA TO API CALL
+                // SEND FORM DATA TO API CALLIs it color
                 return
               } 
               next()

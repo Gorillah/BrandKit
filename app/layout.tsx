@@ -2,7 +2,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs';
-import Navbar from '@/components/Navbar';
 import {cn} from "@/lib/utils";
 
 const font = Montserrat({ 
