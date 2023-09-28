@@ -11,6 +11,13 @@ const fonts = [
   "/fonts/futuristic.webp",
 ]
 
+// const handleClick = (font) => {
+//   setFormData(prev => ({
+//     ...prev,
+//     fonts: [...(prev.fonts || []), font]  
+//   }))
+// }
+
 function Font({formData, setFormData}:any) {
   return (
     <div>
@@ -20,8 +27,21 @@ function Font({formData, setFormData}:any) {
       <div className='grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-fit mx-auto'>
         {fonts.map((font: string, i) => (
           <div key={i} 
-            onClick={() => setFormData({ ...formData, font: font })}
-            className={cn((formData.font === font) ? 'border-4 border-green-500 rounded-[14px] ' : 'border-2 border-transparent rounded-[14px]', 'hover:scale-105 hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 W-[431px] h-[279px')}>
+          onClick={() => {
+            const index = formData.font.findIndex(f => f === font);
+            if(index > -1) {
+              setFormData({
+                ...formData,
+                font: formData.font.filter((f: String) => f !== font) 
+              });
+            } else {
+              setFormData({ 
+                ...formData,
+                font: [...formData.font, font]
+              });
+            }
+          }}
+            className={cn((formData.font.includes(font)) ? 'border-4 border-green-500 rounded-[14px] ' : 'border-2 border-transparent rounded-[14px]', ' hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 outline-none')}>
             <Image
               layout="intrinsic"
               width={431}
