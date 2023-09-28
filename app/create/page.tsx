@@ -35,7 +35,6 @@ export default function CreatePage() {
         setProgress(progress - 33.3)
       }
 
-      console.log(page)
     return(
         <div className='h-screen'>
              <div className="h-16 flex items-center size-icon p-4 justify-between shadow-md mb-18">

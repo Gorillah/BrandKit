@@ -10,7 +10,7 @@ const images = [
 ];
 
 function Style({formData, setFormData}: any) {
-  
+
   return (
     <div className='flex flex-wrap justify-evenly '>
                 {images.map((image: string, i) => (

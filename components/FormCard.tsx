@@ -1,6 +1,7 @@
 "use client"
 
 import {Button} from '@/components/ui/button'
+import {useRouter} from 'next/navigation'
 import Style from "@/components/form-steps/Style"
 import Color from "@/components/form-steps/Color"
 import Font from "@/components/form-steps/Font"
@@ -8,13 +9,14 @@ import { Progress } from '@/components/ui/progress';
 import React from 'react'
 import {useProgressBar} from '@/store/createLogo'
 import {useFormPage} from '@/store/createLogo'
-
-
+import { v4 as uuidv4 } from 'uuid';
 
 export default function FormCard() {
   
   const {progress, setProgress} = useProgressBar()
   const {page, setPage} = useFormPage()
+
+  const router = useRouter();
 
   const next = function() {
     if(page > 1) return
@@ -25,8 +27,12 @@ export default function FormCard() {
   const [formData, setFormData] = React.useState({
     style: "",
     color: "",
-    font: ""
+    font: "",
+    // Generate a rondom number as an id for the logo
+    id: uuidv4()
   })
+
+  console.log(formData.id)
 
   const pages = [
     <Style formData={formData} setFormData={setFormData} key={0}/>,
@@ -48,6 +54,7 @@ export default function FormCard() {
             onClick={() => {
               if(page > 1) {
                 // REDIRECT TO LOGO PAGE
+                router.push('/logo/' + formData.id)
                 // SEND FORM DATA TO API CALL
                 return
               } 
