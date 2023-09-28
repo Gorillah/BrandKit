@@ -44,13 +44,12 @@ export default function FormCard() {
     <div className="form flex flex-col space-y-4">
       <Progress value={progress} className='w-full'/>
       <div className='flex flex-col container'>
-        <div className='grid grid-cols-6 w-full items-center'>
-          <h1 className='text-4xl col-span-4 flex flex-1'>Select Style</h1>
+        <div className='transition transform duration-500 slide-in-left'>
+          {pages[page]}
         </div>
-        {pages[page]}
         <div className='flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2'>
             <Button 
-            className='h-14 text-lg w-40' 
+            className='h-14 text-lg w-40 lg:w-[500px]' 
             onClick={() => {
               if(page > 1) {
                 // REDIRECT TO LOGO PAGE

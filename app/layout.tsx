@@ -6,7 +6,7 @@ import {cn} from "@/lib/utils";
 
 const font = Montserrat({ 
   subsets: ['latin'],
-  weight: ['400'],
+  weight: ['400', '700'],
 })
 
 export const metadata: Metadata = {

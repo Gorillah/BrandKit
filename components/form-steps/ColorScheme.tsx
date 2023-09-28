@@ -13,8 +13,11 @@ const ColorScheme = [
 
 function Color({ formData, setFormData }: any) {
   return (
-    <div className='py-6'>
-      <div className='grid grid-cols-2 gap-2 md:gap-4 w-fit mx-auto'>
+    <div>
+      <div className='py-4'>
+        <h1 className='text-xl font-bold lg:text-3xl'>Select color schemes that matches your brand</h1>
+      </div>
+      <div className='grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-fit mx-auto'>
         {ColorScheme.map((image: string, i) => (
           <Image
             className={cn((formData.color === image) ? 'border-4 border-green-500 rounded-[14px]' : 'border-2 border-transparent rounded-[14px]', 'hover:scale-105 hover:cursor-pointer transition ')}

@@ -36,8 +36,8 @@ export default function CreatePage() {
       }
 
     return(
-        <div className='h-screen'>
-             <div className="h-16 flex items-center size-icon p-4 justify-between shadow-md mb-18">
+        <div>
+             <div className="container h-20 flex items-center size-icon justify-between shadow-md mb-18">
                 <Button variant={"link"} onClick={() => {
                     back()
                 }}>
