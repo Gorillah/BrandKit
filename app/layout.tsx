@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs';
 import {cn} from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster"
 
 const font = Montserrat({ 
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={cn(font.className, "min-h-screen")}>
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

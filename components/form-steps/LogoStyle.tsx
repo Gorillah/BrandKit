@@ -15,38 +15,36 @@ const logos = [
 ];
 
 function Style({formData, setFormData}: any) {
-
+    console.log(formData.style);
   return (
     <div>
     <div className='py-4'>
       <h1 className='text-xl font-bold lg:text-3xl'>Select color schemes that matches your brand</h1>
     </div>
     <div className='grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-fit mx-auto'>
-      {logos.map((font: string, i) => (
+      {logos.map((style: string, i) => (
         <div key={i} 
         onClick={() => {
-          const index = formData.font.findIndex((f: String) => f === font);
+          const index = formData.style.findIndex((f: String) => f === style);
           if(index > -1) {
             setFormData({
               ...formData,
-              font: formData.font.filter((f: String) => f !== font) 
+              style: formData.style.filter((f: String) => f !== style) 
             });
           } else {
             setFormData({ 
               ...formData,
-              font: [...formData.font, font]
+              style: [...formData.style, style]
             });
           }
         }}
-          className={cn((formData.font.includes(font)) ? 'border-4 border-green-500 rounded-[14px] ' : 'border-4 border-transparent rounded-[14px]', ' hover:cursor-pointer transition p-2 md:p-2 flex justify-center items-center bg-gray-200 outline-none rounded-lg hover:scale-[102%] overflow-hidden')}>
+          className={cn((formData.style.includes(style)) ? 'border-4 border-green-500 rounded-[14px] ' : 'border-4 border-transparent rounded-[14px]', ' hover:cursor-pointer transition p-2 md:p-2 flex justify-center items-center bg-gray-200 outline-none rounded-lg hover:scale-[102%] overflow-hidden')}>
           <Image
-            layout="intrinsic"
             width={431}
             height={279}
             key={i}
-            src={font}
+            src={style}
             alt="logo"
-            objectFit='contain'
             loading="lazy"
           />
         </div>

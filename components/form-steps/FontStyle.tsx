@@ -43,13 +43,11 @@ function Font({formData, setFormData}:any) {
           }}
             className={cn((formData.font.includes(font)) ? 'border-4 border-green-500' : 'border-4 border-transparent ', ' hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px]')}>
             <Image
-              layout="intrinsic"
               width={431}
               height={279}
               key={i}
               src={font}
               alt="logo"
-              objectFit='contain'
               loading="lazy"
             />
           </div>

@@ -10,6 +10,7 @@ import React from 'react'
 import {useProgressBar} from '@/store/createLogo'
 import {useFormPage} from '@/store/createLogo'
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from "@/components/ui/use-toast"
 
 export default function FormCard() {
   
@@ -17,9 +18,21 @@ export default function FormCard() {
   const {page, setPage} = useFormPage()
 
   const router = useRouter();
+  const { toast } = useToast()
 
   const next = function() {
     if(page > 1) return
+    if(page === 0 && formData.style.length === 0) {
+      toast({
+      title: "Please select at least one style",
+      })
+    return
+  } else if(page === 1 && formData.color.length === 0) {
+    toast({
+      title: "Please select at least one color",
+    })
+    return
+  }
     setPage(page + 1)
     setProgress(progress + 33.3)
   }
@@ -49,6 +62,12 @@ export default function FormCard() {
             <Button 
             className='h-14 text-lg w-40 lg:w-[500px]' 
             onClick={() => {
+              if(page === 2 && formData.font.length === 0) {
+                toast({
+                  title: "Please select at least one font",
+                })
+                return
+              }
               if(page > 1) {
                 // REDIRECT TO LOGO PAGE
                 router.push('/logo/' + formData.id)

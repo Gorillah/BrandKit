@@ -18,31 +18,29 @@ function Color({ formData, setFormData }: any) {
       <h1 className='text-xl font-bold lg:text-3xl'>Select color schemes that matches your brand</h1>
     </div>
     <div className='grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-fit mx-auto'>
-      {ColorScheme.map((font: string, i) => (
+      {ColorScheme.map((color: string, i) => (
         <div key={i} 
         onClick={() => {
-          const index = formData.font.findIndex((f: String) => f === font);
+          const index = formData.color.findIndex((f: String) => f === color);
           if(index > -1) {
             setFormData({
               ...formData,
-              font: formData.font.filter((f: String) => f !== font) 
+              color: formData.color.filter((f: String) => f !== color) 
             });
           } else {
             setFormData({ 
               ...formData,
-              font: [...formData.font, font]
+              color: [...formData.color, color]
             });
           }
         }}
-          className={cn((formData.font.includes(font)) ? 'border-4 border-green-500' : 'border-4 border-transparent', ' hover:cursor-pointer transition flex justify-center items-center hover:scale-[102%] overflow-hidden rounded-[14px]')}>
+          className={cn((formData.color.includes(color)) ? 'border-4 border-green-500' : 'border-4 border-transparent', ' hover:cursor-pointer transition flex justify-center items-center hover:scale-[102%] overflow-hidden rounded-[14px]')}>
           <Image
-            layout="intrinsic"
             width={431}
             height={279}
             key={i}
-            src={font}
+            src={color}
             alt="logo"
-            objectFit='contain'
             loading="lazy"
           />
         </div>
