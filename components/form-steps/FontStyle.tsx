@@ -28,7 +28,7 @@ function Font({formData, setFormData}:any) {
         {fonts.map((font: string, i) => (
           <div key={i} 
           onClick={() => {
-            const index = formData.font.findIndex(f => f === font);
+            const index = formData.font.findIndex((f: String) => f === font);
             if(index > -1) {
               setFormData({
                 ...formData,
