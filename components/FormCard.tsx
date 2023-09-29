@@ -25,14 +25,12 @@ export default function FormCard() {
   }
 
   const [formData, setFormData] = React.useState({
-    style: "",
-    color: "",
+    style: [],
+    color: [],
     font: [],
     // Generate a rondom number as an id for the logo
     id: uuidv4()
   })
-
-  console.log(formData.font)
 
   const pages = [
     <Style formData={formData} setFormData={setFormData} key={0}/>,

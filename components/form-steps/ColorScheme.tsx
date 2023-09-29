@@ -3,37 +3,52 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 const ColorScheme = [
-  "/cool_color_scheme.webp",
-  "/warm_color_scheme.webp",
-  "/metallic_color_scheme.webp",
-  "/purple_color_scheme.webp",
-  "/neon_color_scheme.webp",
-  "/earth_color_scheme.webp"
+  "/logoColors/cool_color_scheme.webp",
+  "/logoColors/warm_color_scheme.webp",
+  "/logoColors/metallic_color_scheme.webp",
+  "/logoColors/purple_color_scheme.webp",
+  "/logoColors/neon_color_scheme.webp",
+  "/logoColors/earth_color_scheme.webp"
 ]
 
 function Color({ formData, setFormData }: any) {
   return (
     <div>
-      <div className='py-4'>
-        <h1 className='text-xl font-bold lg:text-3xl'>Select color schemes that matches your brand</h1>
-      </div>
-      <div className='grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-fit mx-auto'>
-        {ColorScheme.map((image: string, i) => (
+    <div className='py-4'>
+      <h1 className='text-xl font-bold lg:text-3xl'>Select color schemes that matches your brand</h1>
+    </div>
+    <div className='grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-fit mx-auto'>
+      {ColorScheme.map((font: string, i) => (
+        <div key={i} 
+        onClick={() => {
+          const index = formData.font.findIndex((f: String) => f === font);
+          if(index > -1) {
+            setFormData({
+              ...formData,
+              font: formData.font.filter((f: String) => f !== font) 
+            });
+          } else {
+            setFormData({ 
+              ...formData,
+              font: [...formData.font, font]
+            });
+          }
+        }}
+          className={cn((formData.font.includes(font)) ? 'border-4 border-green-500' : 'border-4 border-transparent', ' hover:cursor-pointer transition flex justify-center items-center hover:scale-[102%] overflow-hidden rounded-[14px]')}>
           <Image
-            className={cn((formData.color === image) ? 'border-4 border-green-500 rounded-[14px]' : 'border-2 border-transparent rounded-[14px]', 'hover:scale-105 hover:cursor-pointer transition ')}
             layout="intrinsic"
             width={431}
             height={279}
             key={i}
-            src={image}
-            onClick={() => setFormData({ ...formData, color: image })}
+            src={font}
             alt="logo"
             objectFit='contain'
             loading="lazy"
           />
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
+  </div>
   )
 }
 
