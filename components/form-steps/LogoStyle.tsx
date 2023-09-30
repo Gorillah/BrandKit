@@ -45,9 +45,7 @@ function Style({ formData, setFormData }: any) {
             }}
             className={cn(
               formData.style.includes(style)
-                ? "border-4 border-green-500 rounded-[14px] "
-                : "border-4 border-transparent rounded-[14px]",
-              " hover:cursor-pointer transition flex justify-center items-center bg-gray-200 outline-none rounded-lg hover:scale-[102%] overflow-hidden"
+                ? 'border-4 border-green-500' : 'border-4 border-transparent ', ' hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px]'
             )}
           >
             <Image
