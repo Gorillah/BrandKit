@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import Style from "@/components/form-steps/LogoStyle";
+import { useSearchParams } from 'next/navigation'
 import Color from "@/components/form-steps/ColorScheme";
 import Font from "@/components/form-steps/FontStyle";
 import { Progress } from "@/components/ui/progress";
@@ -14,19 +14,18 @@ import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 
 export default function FormCard() {
-
   async function generate() {
     const response = await axios.post(
-      "http://localhost:3000/api/generate",
+      "http://localhost:3000/api/create",
       formData
-    )
+    );
     console.log(response.data);
   }
 
   const { progress, setProgress } = useProgressBar();
   const { page, setPage } = useFormPage();
-  const router = useRouter();
   const { toast } = useToast();
+  const searchParams = useSearchParams();
 
   const next = function () {
     if (page > 1) return;
@@ -49,7 +48,7 @@ export default function FormCard() {
     style: [],
     color: [],
     font: [],
-    // Generate a rondom number as an id for the logo
+    company: searchParams.get('search'),
     id: uuidv4(),
   });
 
@@ -77,7 +76,7 @@ export default function FormCard() {
                 return;
               }
               if (page > 1) {
-                generate()
+                generate();
               }
               next();
             }}
