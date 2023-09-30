@@ -10,7 +10,6 @@ export default function Generate() {
     const router = useRouter()
 
     useEffect(() => {
-        console.log(formData)
         if(!formData.fontStyle.length || !formData.logoStyle.length || !formData.logoColor.length) {
             router.push('/')
         }

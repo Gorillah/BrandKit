@@ -4,15 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  const style = body.style.map((style: string) => {
+  const style = body.logoStyle.map((style: string) => {
     return style.split('/').pop()?.split('.').slice(-2, -1).join('.')
   })
 
-  const font = body.font.map((font: string) => {
+  const font = body.logoColor.map((font: string) => {
     return font.split('/').pop()?.split('.').slice(-2, -1).join('.')
   })
 
-  const color = body.color.map((color: string) => {
+  const color = body.FontStyle.map((color: string) => {
     return color.split('/').pop()?.split('.').slice(-2, -1).join('.')
   })
 
