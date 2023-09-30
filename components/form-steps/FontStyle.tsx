@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { useFormData } from '@/store/createLogo'
 
 const fonts = [
   "/fonts/modern.webp",
@@ -11,14 +12,10 @@ const fonts = [
   "/fonts/futuristic.webp",
 ]
 
-// const handleClick = (font) => {
-//   setFormData(prev => ({
-//     ...prev,
-//     fonts: [...(prev.fonts || []), font]  
-//   }))
-// }
+function Font() {
 
-function Font({formData, setFormData}:any) {
+  const { fontStyle, setFontStyle, removeFontStyle } = useFormData();
+
   return (
     <div>
       <div className='py-4'>
@@ -28,20 +25,14 @@ function Font({formData, setFormData}:any) {
         {fonts.map((font: string, i) => (
           <div key={i} 
           onClick={() => {
-            const index = formData.font.findIndex((f: String) => f === font);
+            const index = fontStyle.findIndex((f: String) => f === font);
             if(index > -1) {
-              setFormData({
-                ...formData,
-                font: formData.font.filter((f: String) => f !== font) 
-              });
+              removeFontStyle(font);
             } else {
-              setFormData({ 
-                ...formData,
-                font: [...formData.font, font]
-              });
+              setFontStyle(font);
             }
           }}
-            className={cn((formData.font.includes(font)) ? 'border-4 border-green-500' : 'border-4 border-transparent ', ' hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px]')}>
+            className={cn((fontStyle.includes(font)) ? 'border-4 border-green-500' : 'border-4 border-transparent ', ' hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px]')}>
             <Image
               width={431}
               height={279}

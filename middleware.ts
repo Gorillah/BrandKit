@@ -13,6 +13,9 @@ export default authMiddleware({
     "/api/generate",
     "/api/users",
     "/api/create",
+    "/api/result",
+    "/create",
+    "/generate"
   ],
 });
 

@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useFormData } from "@/store/createLogo";
 
 const ColorScheme = [
   "/logoColors/cool_color_scheme.webp",
@@ -12,7 +13,10 @@ const ColorScheme = [
   "/logoColors/earth_color_scheme.webp",
 ];
 
-function Color({ formData, setFormData }: any) {
+function Color() {
+
+  const { logoColor, setLogoColor, removelogoColor } = useFormData();
+
   return (
     <div>
       <div className="py-4">
@@ -25,23 +29,17 @@ function Color({ formData, setFormData }: any) {
           <div
             key={i}
             onClick={() => {
-              const index = formData.color.findIndex(
+              const index = logoColor.findIndex(
                 (f: String) => f === color
               );
               if (index > -1) {
-                setFormData({
-                  ...formData,
-                  color: formData.color.filter((f: String) => f !== color),
-                });
+                removelogoColor(color)
               } else {
-                setFormData({
-                  ...formData,
-                  color: [...formData.color, color],
-                });
+                setLogoColor(color)
               }
             }}
             className={cn(
-              formData.color.includes(color)
+              logoColor.includes(color)
                 ? "border-4 border-green-500"
                 : "border-4 border-transparent",
               " hover:cursor-pointer transition flex justify-center items-center hover:scale-[102%] overflow-hidden rounded-[14px]"
@@ -50,7 +48,8 @@ function Color({ formData, setFormData }: any) {
             <div className="w-[550px]">
               <AspectRatio ratio={15 / 9}>
                 <Image
-                  layout="fill"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   key={i}
                   src={color}
                   alt="logo"
