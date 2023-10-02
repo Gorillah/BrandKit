@@ -12,6 +12,7 @@ import TypewriterTitle from "@/components/TypewriterTitle";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import LogoShowcase from "@/components/logoShowcase";
+import showcase from "@/public/showcase.png";
 
 export default function HomePage() {
   const router = useRouter();
@@ -75,13 +76,16 @@ export default function HomePage() {
               </Form>
             </div>
           </div>
-          <div className="hidden lg:flex">
-            <Image
-              src="/logo-placeholder-image.png"
-              alt="Logo"
-              width={400}
-              height={400}
-            />
+          <div className="hidden lg:flex relative w-[500px] h-[500px]">
+            <AspectRatio ratio={1 / 1}>
+              <Image
+                src={showcase}
+                className="animate-float"
+                alt="Logo"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"
+              />
+            </AspectRatio>
           </div>
         </div>
       </div>
@@ -90,7 +94,9 @@ export default function HomePage() {
 
       <div className="container">
         <div>
-          <h3 className="text-2xl text-center">Brand Logo Design</h3>
+          <h3 className="text-2xl text-center animate-float">
+            Brand Logo Design
+          </h3>
           <p>
             LogoAI is a brand building platform that can help you create
             professional logos, design matching identities, and automate brand
