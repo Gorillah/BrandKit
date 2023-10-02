@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import TypewriterTitle from "@/components/TypewriterTitle";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import LogoShowcase from "@/components/logoShowcase";
 
 export default function HomePage() {
   const router = useRouter();
@@ -30,15 +31,15 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col space-y-10 bg-slate-300">
-      <div className="bg-gray-500 h-[500px] flex flex-col"> {/*bg*/}
+    <div className="flex flex-col space-y-10">
+      <div className="h-fit flex flex-col bg-[#2127b3] text-white py-20">
         <div className="container flex items-center justify-center lg:justify-between h-full">
           <div className="flex flex-col gap-y-6 w-[500px]">
             <h1 className="text-6xl font-bold">Make a logo with LOGO</h1>
             <h2 className="font-medium text-xl">
               <TypewriterTitle />
             </h2>
-            <p className="text-sm text-medium">
+            <p className="text-medium">
               Logo Maker combines your logo design preferences with Artificial
               Intelligence to help you create a custom logo you will love. All
               it takes is a few clicks and five minutes.
@@ -52,10 +53,10 @@ export default function HomePage() {
                   <FormField
                     name="companyName"
                     render={({ field }) => (
-                      <FormItem className="col-span-12 lg:col-span-10">
+                      <FormItem className="col-span-12 lg:col-span-9">
                         <FormControl>
                           <Input
-                            className="flex w-full text-md"
+                            className="flex w-full text-md text-black"
                             disabled={isLoading}
                             placeholder="Your company name"
                             {...field}
@@ -66,7 +67,7 @@ export default function HomePage() {
                   />
                   <Button
                     disabled={isLoading}
-                    className="col-span-12 lg:col-span-2"
+                    className="col-span-12 lg:col-span-3 bg-[#F64C72]"
                   >
                     Create
                   </Button>
@@ -85,75 +86,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="container grid grid-cols-2 lg:grid-cols-4 w-full gap-4">
-        <div>
-          <AspectRatio ratio={1 / 1}>
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-          </AspectRatio>
-        </div>
-
-        <div>
-          <AspectRatio ratio={1 / 1}>
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-          </AspectRatio>
-        </div>
-
-        <div>
-          <AspectRatio ratio={1 / 1}>
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-          </AspectRatio>
-        </div>
-
-        <div>
-          <AspectRatio ratio={1 / 1}>
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-            <Image
-              className="grid col-span-2"
-              src="/square-placeholder.png"
-              alt="Logo"
-              fill
-            />
-          </AspectRatio>
-        </div>
-      </div>
+      <LogoShowcase />
 
       <div className="container">
         <div>
