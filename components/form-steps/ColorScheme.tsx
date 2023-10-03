@@ -14,7 +14,6 @@ const ColorScheme = [
 ];
 
 function Color() {
-
   const { logoColor, setLogoColor, removelogoColor } = useFormData();
 
   return (
@@ -29,19 +28,17 @@ function Color() {
           <div
             key={i}
             onClick={() => {
-              const index = logoColor.findIndex(
-                (f: String) => f === color
-              );
+              const index = logoColor.findIndex((f: String) => f === color);
               if (index > -1) {
-                removelogoColor(color)
+                removelogoColor(color);
               } else {
-                setLogoColor(color)
+                setLogoColor(color);
               }
             }}
             className={cn(
               logoColor.includes(color)
-                ? "border-4 border-green-500"
-                : "border-4 border-transparent",
+                ? "border-4 border-[#2F2FA2]"
+                : "border-4 border-transparent border-gray-200",
               " hover:cursor-pointer transition flex justify-center items-center hover:scale-[102%] overflow-hidden rounded-[14px]"
             )}
           >
