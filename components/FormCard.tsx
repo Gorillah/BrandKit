@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import Style from "@/components/form-steps/LogoStyle";
-import { useSearchParams } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-import Color from "@/components/form-steps/ColorScheme";;
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import Color from "@/components/form-steps/ColorScheme";
 import Font from "@/components/form-steps/FontStyle";
 import { Progress } from "@/components/ui/progress";
 import React, { useEffect } from "react";
@@ -12,14 +12,11 @@ import { useProgressBar } from "@/store/createLogo";
 import { useFormPage } from "@/store/createLogo";
 import { useFormData } from "@/store/createLogo";
 import { useToast } from "@/components/ui/use-toast";
-import querystring from 'querystring';
+import querystring from "querystring";
 import axios from "axios";
 
-
 export default function FormCard() {
-  
-  const router = useRouter()
-
+  const router = useRouter();
 
   async function createLogo() {
     // router.push('/create')
@@ -34,19 +31,28 @@ export default function FormCard() {
   const { page, setPage } = useFormPage();
   const { toast } = useToast();
   const searchParams = useSearchParams();
-  const { company, logoStyle, logoColor, fontStyle, removeAllLogoStyles, removeAllLogoColors, removeAllFontStyles, clearCompany } = useFormData();
+  const {
+    company,
+    logoStyle,
+    logoColor,
+    fontStyle,
+    removeAllLogoStyles,
+    removeAllLogoColors,
+    removeAllFontStyles,
+    clearCompany,
+  } = useFormData();
 
-  console.log(page)
+  console.log(page);
 
   useEffect(() => {
     removeAllFontStyles();
     removeAllLogoColors();
     removeAllLogoStyles();
     clearCompany();
-  }, [])
+  }, []);
 
   const next = function () {
-    if (page > 1) router.push('/generate');
+    if (page > 1) router.push("/generate");
     if (page === 0 && logoStyle.length === 0) {
       toast({
         title: "Please select at least one style",
@@ -62,11 +68,7 @@ export default function FormCard() {
     setProgress(progress + 33.3);
   };
 
-  const pages = [
-    <Style key={0} />,
-    <Color key={1} />,
-    <Font key={2} />,
-  ];
+  const pages = [<Style key={0} />, <Color key={1} />, <Font key={2} />];
 
   return (
     <div className="form flex flex-col space-y-4">
@@ -77,7 +79,7 @@ export default function FormCard() {
         </div>
         <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
           <Button
-            className="h-14 text-lg w-40 lg:w-[500px]"
+            className="h-14 text-lg w-40 lg:w-[500px] bg-[#F64C72]"
             onClick={() => {
               if (page === 2 && fontStyle.length === 0) {
                 toast({
