@@ -64,7 +64,7 @@ export default function Navbar() {
           <UserButton afterSignOutUrl="/" />
         )}
       </div>
-      <div className="md:hidden text-lg">
+      <div className="md:hidden text-lg flex items-center">
         <Sheet>
           <SheetTrigger>
             <Menu className="text-white" />

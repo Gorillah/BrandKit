@@ -13,6 +13,7 @@ import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import LogoShowcase from "@/components/logoShowcase";
 import showcase from "@/public/showcase.png";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const router = useRouter();
@@ -122,6 +123,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
