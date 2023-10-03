@@ -17,17 +17,14 @@ const routes = [
   {
     label: "Dashboard",
     href: "/aa",
-    icon: Menu,
   },
   {
-    label: "Dashboard",
-    href: "?route=dashboardx",
-    icon: Menu,
+    label: "Price",
+    href: "/price",
   },
   {
-    label: "Dashboard",
-    href: "/xa",
-    icon: Menu,
+    label: "Help",
+    href: "/help",
   },
 ];
 

@@ -5,7 +5,7 @@ import fs from "node:fs/promises";
 import { useEffect, useState } from "react";
 import { LogoShowcaseArray } from "@/utils/LogoShowcaseArray";
 
-export default async function LogoShowcase() {
+export default function LogoShowcase() {
   return (
     <div className="container grid grid-cols-2 md:grid-cols-3 gap-4">
       {LogoShowcaseArray.map((src, index) => (
