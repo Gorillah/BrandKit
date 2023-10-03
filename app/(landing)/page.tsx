@@ -15,6 +15,34 @@ import LogoShowcase from "@/components/logoShowcase";
 import showcase from "@/public/showcase.png";
 import Footer from "@/components/Footer";
 
+const features = [
+  {
+    title: "AI Logo Maker",
+    desc: "Logo Maker combines your logo design preferences with Artificial Intelligence to help you create a custom logo you will love.",
+    img: showcase,
+  },
+  {
+    title: "Brand Center",
+    desc: "One-click to activate your personal brand center for more consistent visuals for all your branded content. ",
+    img: showcase,
+  },
+  {
+    title: "Social Media",
+    desc: "Facebook covers, Twitter headers, and Instagram stories, your on-brand social media content is all part of your brand package.",
+    img: showcase,
+  },
+  {
+    title: "Social Media",
+    desc: "Whether it’s for hiring or promotions, you can customize and download your branded poster all within your brand center.",
+    img: showcase,
+  },
+  {
+    title: "Social Media",
+    desc: "Select from dozens of business card designs that are customized based on your logo styles and colors.",
+    img: showcase,
+  },
+];
+
 export default function HomePage() {
   const router = useRouter();
 
@@ -93,9 +121,9 @@ export default function HomePage() {
 
       <LogoShowcase />
 
-      <div className="container">
+      <div className="container flex flex-col gap-6">
         <div>
-          <h3 className="text-2xl text-center animate-float">
+          <h3 className="text-3xl text-bold text-center animate-float">
             Brand Logo Design
           </h3>
           <p>
@@ -104,23 +132,26 @@ export default function HomePage() {
             promotion with on-brand social media content.
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 w-full">
-          <div>
-            <AspectRatio ratio={1 / 1}>
-              <Image src="/logo-placeholder-image.png" alt="Logo" fill></Image>
-            </AspectRatio>
-            <h3 className="text-xl text-semibold">test</h3>
-            <p className="text-md">
-              Anim commodo laborum quis aliqua. laborum quis aliqua
-            </p>
-          </div>
-          <div>
-            <AspectRatio ratio={1 / 1}>
-              <Image src="/logo-placeholder-image.png" alt="Logo" fill></Image>
-            </AspectRatio>
-            <h4>test</h4>
-            <p>testopfkrseafka g resg </p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full h-fit gap-4">
+          {features.map((feature, idx) => (
+            <div className="w-full flex gap-2 bg-slate-300 py-2 px-4" key={idx}>
+              <div className="w-1/3">
+                <AspectRatio ratio={1 / 1}>
+                  <Image
+                    src="/logo-placeholder-image.png"
+                    alt="Logo"
+                    fill
+                  ></Image>
+                </AspectRatio>
+              </div>
+              <div className="w-2/3 flex flex-col justify-center">
+                <h3 className="text-xl text-semibold">test</h3>
+                <p className="text-md">
+                  Anim commodo laborum quis aliqua. laborum quis aliqua
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <Footer />
