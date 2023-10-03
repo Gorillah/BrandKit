@@ -14,6 +14,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import LogoShowcase from "@/components/logoShowcase";
 import showcase from "@/public/showcase.png";
 import Footer from "@/components/Footer";
+import {cn} from "@/lib/utils";
 
 const features = [
   {
@@ -34,11 +35,6 @@ const features = [
   {
     title: "Social Media",
     desc: "Whether it’s for hiring or promotions, you can customize and download your branded poster all within your brand center.",
-    img: showcase,
-  },
-  {
-    title: "Social Media",
-    desc: "Select from dozens of business card designs that are customized based on your logo styles and colors.",
     img: showcase,
   },
 ];
@@ -126,15 +122,15 @@ export default function HomePage() {
           <h3 className="text-3xl text-bold text-center animate-float">
             Brand Logo Design
           </h3>
-          <p>
+          <p className="max-w-2xl text-center mx-auto">
             LogoAI is a brand building platform that can help you create
             professional logos, design matching identities, and automate brand
             promotion with on-brand social media content.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 w-full h-fit gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 w-full h-fit gap-4">
           {features.map((feature, idx) => (
-            <div className="w-full flex gap-2 bg-slate-300 py-2 px-4" key={idx}>
+              <div className={cn(idx % 2 === 0 ? "flex-row-reverse" : "flex-row", "w-full flex gap-2 bg-slate-300 py-2 px-4")}key={idx}>
               <div className="w-1/3">
                 <AspectRatio ratio={1 / 1}>
                   <Image
