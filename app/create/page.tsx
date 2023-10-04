@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, {useEffect} from 'react';
-import FormCard from '@/components/FormCard';
+import FormCard from '@/components/logoForm';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useFormPage, useProgressBar } from '@/store/createLogo';
@@ -12,7 +12,6 @@ import { useFormPage, useProgressBar } from '@/store/createLogo';
 export default function CreatePage({}) {
 
     const router = useRouter()
-
     const searchParams = useSearchParams()
 
     const company = searchParams.get('company');
@@ -25,23 +24,15 @@ export default function CreatePage({}) {
         setProgress(33)
     }, [setPage, setProgress])
 
-    // if(!company) {
-    //     router.push('/')
-    // }
+    if(!company) {
+        router.push('/')
+    }
 
     const back = function() {
         if(page < 1) router.push('/')
         setPage(page - 1)
         setProgress(progress - 33.3)
       }
-
-    //   async function generate() {
-    //     const response = await axios.post(
-    //       "http://localhost:3000/api/create",
-    //       formData
-    //     );
-    //     console.log(response.data);
-    //   }
 
     return(
         <div>

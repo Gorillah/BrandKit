@@ -1,4 +1,4 @@
-import { db } from "@/lib/config";
+import { db } from "@/lib/db";
 import { users } from "@/db/schema";
 
 export default async function getAllUsers() {

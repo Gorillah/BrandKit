@@ -38,6 +38,7 @@ export default function Navbar() {
           className="flex justify-center items-center"
           alt="Logo"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"
           style={{ objectFit: "contain", width: "100%", height: "100%" }}
         />
       </Link>

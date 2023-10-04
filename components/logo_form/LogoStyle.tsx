@@ -46,7 +46,14 @@ function Style() {
             )}
           >
             <AspectRatio ratio={1 / 1}>
-              <Image fill key={i} src={style} alt="logo" loading="lazy" />
+              <Image
+                fill
+                key={i}
+                src={style}
+                alt="logo"
+                sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"
+                priority
+              />
             </AspectRatio>
           </div>
         ))}
