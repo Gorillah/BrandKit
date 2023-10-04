@@ -9,3 +9,10 @@ type Logos = {
   companyName: string;
   logoImage: string;
 };
+
+type formData = {
+  company: string;
+  fontStyle: string[];
+  logoStyle: string[];
+  logoColor: string[];
+}
