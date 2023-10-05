@@ -8,14 +8,6 @@ export default authMiddleware({
     "/",
     "/sign-in",
     "/sign-up",
-    "/create",
-    "/logo",
-    "/api/generate",
-    "/api/users",
-    "/api/create",
-    "/api/result",
-    "/api/create",
-    "/generate",
   ],
 });
 

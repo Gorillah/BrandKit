@@ -1,11 +1,11 @@
-import { drizzle } from "drizzle-orm/planetscale-serverless";
 // import getAllUsers from "@/lib/getAllUsers";
 import { NextRequest, NextResponse } from "next/server";
-import generateImage from "@/lib/generateLogo";
+
 import { auth } from "@clerk/nextjs";
 import { generateLogo, generateLogoPrompt } from "@/lib/openai";
 import { db } from "@/lib/db";
 import { logos } from "@/drizzle/schema";
+import { redirect } from "next/navigation";
 
 // export const runtime = "edge";
 

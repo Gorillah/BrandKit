@@ -31,8 +31,8 @@ const routes = [
 export default function Navbar() {
   const { userId } = auth();
   return (
-    <div className="h-16 flex items-center size-icon p-4 justify-between shadow-md bg-[#2127b3]">
-      <Link className="text-white relative w-36 h-8" href={"/"}>
+    <div className="h-16 flex size-icon p-4 shadow-md bg-primary justify-between">
+      <Link className="text-white relative w-36 h-8 justify-start" href={"/"}>
         <Image
           src="/brandkit_01.webp"
           className="flex justify-center items-center"
@@ -51,18 +51,18 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
-      <div className="hidden md:flex text-white">
+      <div className="hidden md:flex text-black justify-end w-36 md:w-fit">
         {!userId ? (
           <div className="flex gap-2">
             <Link href={"/sign-in"}>
               <Button variant={"outline"}>Sign in</Button>
             </Link>
             <Link href={"/sign-up"}>
-              <Button>Sign up</Button>
+              <Button variant={"secondary"}>Sign up</Button>
             </Link>
           </div>
         ) : (
-          <UserButton afterSignOutUrl="/" />
+          <UserButton afterSignOutUrl="/"  />
         )}
       </div>
       <div className="md:hidden text-lg flex items-center">

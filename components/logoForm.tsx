@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Style from "@/components/logo_form/LogoStyle";
+import Style from "@/components/logo_form/Style";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import Color from "@/components/logo_form/ColorScheme";
-import Font from "@/components/logo_form/FontStyle";
+import Color from "@/components/logo_form/Color";
+import Font from "@/components/logo_form/Font";
 import { Progress } from "@/components/ui/progress";
 import React, { useEffect } from "react";
 import { useProgressBar } from "@/store/createLogo";
@@ -96,7 +96,7 @@ export default function FormCard() {
 
   const pages = [<Style key={0} />, <Color key={1} />, <Font key={2} />];
   return (
-    <div className="form flex flex-col space-y-4">
+    <div className="form flex flex-col space-y-4 pb-20">
       <Progress value={progress} className="w-full" />
       <div className="flex flex-col container">
         <div className="transition transform duration-500 slide-in-left">
@@ -104,7 +104,8 @@ export default function FormCard() {
         </div>
         <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
           <Button
-            className="h-14 text-lg w-40 lg:w-[500px] bg-[#F64C72]"
+            className="h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl"
+            variant={"default"}
             onClick={() => {
               if (page === 2 && fontStyle.length === 0) {
                 toast({

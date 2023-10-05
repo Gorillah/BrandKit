@@ -43,7 +43,7 @@ function Color() {
             )}
           >
             <div className="w-[550px]">
-              <AspectRatio ratio={15 / 9}>
+              <AspectRatio ratio={1 / 1}>
                 <Image
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
