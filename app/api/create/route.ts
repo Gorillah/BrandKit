@@ -7,6 +7,8 @@ import { generateLogo, generateLogoPrompt } from "@/lib/openai";
 import { db } from "@/lib/db";
 import { logos } from "@/drizzle/schema";
 
+export const runtime = "edge";
+
 export async function POST(request: NextRequest) {
   const { userId } = auth();
   const userIdString = String(userId);
@@ -58,7 +60,7 @@ export async function POST(request: NextRequest) {
     userId: userIdString,
     companyName: formData.company,
     logoUrl: logo_url,
-  })
+  });
 
   return NextResponse.json({
     id: logo.insertId,

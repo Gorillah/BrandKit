@@ -10,7 +10,7 @@ export default function Generate() {
   const router = useRouter();
 
   async function logoGeneration() {
-    const res = axios.post("http://localhost:3000/api/create");
+    const res = axios.post("/api/create");
   }
 
   useEffect(() => {
