@@ -53,7 +53,6 @@ export default function HomePage() {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = (values: z.infer<typeof companyFormSchema>) => {
-    console.log("Clicked!, values: ", values);
     router.push("/create?company=" + values.companyName);
   };
 

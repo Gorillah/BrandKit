@@ -7,7 +7,7 @@ import { generateLogo, generateLogoPrompt } from "@/lib/openai";
 import { db } from "@/lib/db";
 import { logos } from "@/drizzle/schema";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 export async function POST(request: NextRequest) {
   const { userId } = auth();
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
 
   const logo = await db.insert(logos).values({
     userId: userIdString,
-    companyName: formData.company,
+    companyName: body.company,
     logoUrl: logo_url,
   });
 

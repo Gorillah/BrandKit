@@ -22,7 +22,7 @@ export async function uploadFileToFirebase(logo_Url: string, name: string) {
   try {
     const response = await fetch(logo_Url);
     const buffer = await response.arrayBuffer();
-    const file_name = name.replace(" ", "") + Date.now + ".png";
+    const file_name = name.replace(" ", "") + Date.now() + ".png";
     const storageRef = ref(storage, file_name);
     await uploadBytes(storageRef, buffer, {
       contentType: "image/png",

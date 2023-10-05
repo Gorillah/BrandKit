@@ -29,7 +29,6 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
         eq(logos.userId, userId) // Created by current user
       )
     );
-    console.log(logoSelect)
   if (logoSelect.length != 1) return redirect("/");
   const logo = logoSelect[0];
   return (

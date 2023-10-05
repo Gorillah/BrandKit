@@ -28,6 +28,7 @@ export default function FormCard() {
     logoStyle,
     logoColor,
     fontStyle,
+    setCompany,
     removeAllLogoStyles,
     removeAllLogoColors,
     removeAllFontStyles,
@@ -46,15 +47,15 @@ export default function FormCard() {
     mutationFn: async (id: string) => {
       const response = await axios.post("/api/uploadToFirebase", {
         id,
-      })
-      return response.data
-    }
-  })
+      });
+      return response.data;
+    },
+  });
 
   const createLogo = useMutation({
     mutationFn: async () => {
       const res = await axios.post("/api/create", {
-        company,
+        company: searchParams.get("company"),
         logoStyle,
         logoColor,
         fontStyle,
@@ -71,7 +72,6 @@ export default function FormCard() {
       },
       onError: (error) => {
         window.alert(error);
-        console.error(error);
       },
     });
   };
@@ -95,7 +95,6 @@ export default function FormCard() {
   };
 
   const pages = [<Style key={0} />, <Color key={1} />, <Font key={2} />];
-
   return (
     <div className="form flex flex-col space-y-4">
       <Progress value={progress} className="w-full" />
