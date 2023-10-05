@@ -1,10 +1,13 @@
 // import { clerk } from "@/db/clerk.server";
+import { Button } from "@/components/ui/button";
 import { logos } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import useDownloader from "react-use-downloader";
+import Logo from "@/components/Logo";
 
 type Props = {
   params: {
@@ -33,7 +36,7 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
   const logo = logoSelect[0];
   return (
     <div className="min-h-screen container flex items-center justify-center">
-      <Image src={logo.logoUrl} alt="" width={500} height={500} />
+      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} />
     </div>
   );
 };
