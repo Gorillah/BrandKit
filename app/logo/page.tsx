@@ -4,7 +4,7 @@ import { logos } from "@/drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import Logos from "@/components/logos";
-import { Plus } from "lucide-react";
+import AddLogo from "@/components/AddLogo"
 
 export default async function Logo() {
   const { userId } = auth();
@@ -15,9 +15,7 @@ export default async function Logo() {
   );
   return (
     <div className="container grid grid-cols-2 md:grid-cols-3 gap-2 my-4">
-      <div className="bg-gray-300 flex items-center justify-center">
-        <Plus size={80} />
-      </div>
+      <AddLogo />
       {logoSelect.map((logo) => (
         <Logos key={logo.id} logoUrl={logo.logoUrl} id={logo.id} />
       ))}

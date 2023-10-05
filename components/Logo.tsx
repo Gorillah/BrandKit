@@ -3,33 +3,53 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import useDownloader from "react-use-downloader";
+import useRouter from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import axios from "axios";
 
 type Props = {
   logoUrl: string;
   companyName: string;
 };
 
-function Logo({ logoUrl, companyName }: Props) {
-  console.log("ok: ", logoUrl);
-  const { download } = useDownloader({
-    mode: "no-cors",
-  });
+const Logo = ({ logoUrl, companyName }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const handlePayment = async () => {
+    console.log('ok CLK!')
+    try {
+      setLoading(true)
+      const response = await axios.get("/api/stripe")
+      window.location.href = response.data.url
+    } catch (error) {
+      setLoading(false)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="flex flex-col items-center gap-4">
+      <div className="w-full">
+        <Link href={"/logo"}>
+          <ArrowLeft />
+        </Link>
+      </div>
       <Image
         src={logoUrl}
         alt=""
         width={500}
         height={500}
         priority
-        className="outline outline-4 outline-black"
+        className="shadow-md shadow-gray-400"
       />
       <div className="flex gap-2 justify-between">
-        <Button onClick={() => download(logoUrl, companyName)}>
+        <Button>
           Download Free
         </Button>
         <Button
-          onClick={() => download(logoUrl, companyName)}
+          onClick={handlePayment}
           variant={"secondary"}
         >
           Download Premium

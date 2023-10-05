@@ -6,6 +6,7 @@ import {
   int,
   varchar,
   datetime,
+  tinyint,
   unique,
 } from "drizzle-orm/mysql-core";
 import { sql } from "drizzle-orm";
@@ -20,6 +21,7 @@ export const logos = mysqlTable(
     ),
     logoUrl: varchar("logo_url", { length: 2500 }).notNull(),
     userId: varchar("user_id", { length: 255 }).notNull(),
+    isPaid: tinyint("isPaid").default(0),
   },
   (table) => {
     return {

@@ -15,6 +15,7 @@ import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function FormCard() {
   const router = useRouter();
@@ -104,7 +105,10 @@ export default function FormCard() {
         </div>
         <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
           <Button
-            className="h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl"
+            className={cn(
+              "h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl",
+              createLogo.isLoading && "hidden"
+            )}
             variant={"default"}
             onClick={() => {
               if (page === 2 && fontStyle.length === 0) {
@@ -124,6 +128,12 @@ export default function FormCard() {
           </Button>
         </div>
       </div>
+      {createLogo.isLoading && (
+        <div className="flex justify-center items-center">
+          <Loader2 className="animate-spin" size={40} />
+          <p>Generating Logo ...</p>
+        </div>
+      )}
     </div>
   );
 }

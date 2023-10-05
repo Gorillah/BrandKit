@@ -51,7 +51,7 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
-      <div className="hidden md:flex text-black justify-end w-36 md:w-fit">
+      <div className="hidden md:flex text-black justify-end w-36">
         {!userId ? (
           <div className="flex gap-2">
             <Link href={"/sign-in"}>
