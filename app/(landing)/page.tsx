@@ -95,7 +95,7 @@ export default function HomePage() {
                   <Button
                     size={"lg"}
                     disabled={isLoading}
-                    className="col-span-12 lg:col-span-3 bg-[#F64C72]"
+                    className="col-span-12 lg:col-span-3 bg-[#F64C72] text-xl"
                   >
                     Create
                   </Button>
@@ -133,7 +133,7 @@ export default function HomePage() {
             <div
               className={cn(
                 idx % 2 === 0 ? "flex-row" : "flex-row-reverse md:flex-row",
-                "w-full flex gap-2 px-6 min-h-[200px] rounded-lg text-white bg-[#242582]"
+                "w-full flex gap-2 px-6 min-h-[200px] rounded-lg text-white bg-[#2127b3]"
               )}
               key={idx}
             >

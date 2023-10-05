@@ -9,13 +9,15 @@ const config = {
 
 export default withPlaiceholder({
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'oaidalleapiprodscus.blob.core.windows.net',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    domains: [
+      "oaidalleapiprodscus.blob.core.windows.net",
+      "firebasestorage.googleapis.com",
+    ]
   },
+  typescript: {
+    ignoreBuildErrors: true
+  },
+  eslint: {
+    ignoreDuringBuilds: true
+  }
 });

@@ -42,9 +42,18 @@ export default function FormCard() {
     clearCompany();
   }, []);
 
+  const uploadToFirebase = useMutation({
+    mutationFn: async (id: string) => {
+      const response = await axios.post("/api/uploadToFirebase", {
+        id,
+      })
+      return response.data
+    }
+  })
+
   const createLogo = useMutation({
     mutationFn: async () => {
-      const res = await axios.post("http://localhost:3000/api/create", {
+      const res = await axios.post("/api/create", {
         company,
         logoStyle,
         logoColor,
@@ -57,6 +66,7 @@ export default function FormCard() {
   const handleSubmit = async () => {
     createLogo.mutate(undefined, {
       onSuccess: ({ id }) => {
+        uploadToFirebase.mutate(id);
         router.push(`/logo/${id}`);
       },
       onError: (error) => {

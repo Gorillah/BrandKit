@@ -1,11 +1,10 @@
-import { clerk } from "@/db/clerk.server";
+// import { clerk } from "@/db/clerk.server";
 import { logos } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
 
 type Props = {
   params: {
@@ -18,7 +17,9 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
   if (!userId) return redirect("/");
 
   // Access clerk backend and get the user
-  const user = await clerk.users.getUser(userId);
+  // const user = await clerk.users.getUser(userId);
+
+  // Get Selected Logo with Id, and UserId
   const logoSelect = await db
     .select()
     .from(logos)
@@ -28,6 +29,7 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
         eq(logos.userId, userId) // Created by current user
       )
     );
+    console.log(logoSelect)
   if (logoSelect.length != 1) return redirect("/");
   const logo = logoSelect[0];
   return (
