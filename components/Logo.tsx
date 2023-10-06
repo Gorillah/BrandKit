@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { Button } from "./ui/button";
-import useDownloader from "react-use-downloader";
-import useRouter from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
@@ -12,15 +10,17 @@ import axios from "axios";
 type Props = {
   logoUrl: string;
   companyName: string;
+  logoId: string;
 };
 
-const Logo = ({ logoUrl, companyName }: Props) => {
+const Logo = ({ logoUrl, companyName, logoId }: Props) => {
   const [loading, setLoading] = useState(false);
+
   const handlePayment = async () => {
-    console.log('ok CLK!')
     try {
       setLoading(true)
-      const response = await axios.get("/api/stripe")
+      console.log("components/logo.tsx", logoId)
+      const response = await axios.post("/api/stripe", logoId)
       window.location.href = response.data.url
     } catch (error) {
       setLoading(false)

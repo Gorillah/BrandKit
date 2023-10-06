@@ -20,7 +20,7 @@ function Style() {
   const { logoStyle, setLogoStyle, removeLogoStyle } = useFormData();
 
   return (
-    <div className="pb-20">
+    <div>
       <div className="py-4">
         <h1 className="text-xl font-bold lg:text-3xl">
           Select Logo Style that matches your brand

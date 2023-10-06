@@ -36,7 +36,7 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
   const logo = logoSelect[0];
   return (
     <div className="min-h-screen container flex items-center justify-center">
-      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} />
+      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} />
     </div>
   );
 };

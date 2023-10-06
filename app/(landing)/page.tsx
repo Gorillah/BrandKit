@@ -92,9 +92,10 @@ export default function HomePage() {
                     )}
                   />
                   <Button
+                    variant={"secondary"}
                     size={"lg"}
                     disabled={isLoading}
-                    className="col-span-12 lg:col-span-3 bg-[#F64C72] text-xl"
+                    className="col-span-12 lg:col-span-3 text-xl"
                   >
                     Create
                   </Button>

@@ -105,11 +105,11 @@ export default function FormCard() {
         </div>
         <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
           <Button
+          variant={"default"}
             className={cn(
               "h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl",
               createLogo.isLoading && "hidden"
             )}
-            variant={"default"}
             onClick={() => {
               if (page === 2 && fontStyle.length === 0) {
                 toast({
