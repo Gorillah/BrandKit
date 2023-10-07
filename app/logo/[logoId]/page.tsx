@@ -8,6 +8,13 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import useDownloader from "react-use-downloader";
 import Logo from "@/components/Logo";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Logo Maker",
+  description: "Generate your perfect logo simply with BrandKit",
+};
+
 
 type Props = {
   params: {
@@ -36,7 +43,7 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
   const logo = logoSelect[0];
   return (
     <div className="min-h-screen container flex items-center justify-center">
-      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} />
+      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} isPaid={logo.isPaid!}/>
     </div>
   );
 };

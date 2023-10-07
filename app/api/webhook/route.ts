@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 }
 
 const session = event.data.object as Stripe.Checkout.Session;
-  if (event.type === "checkout.session.completed") {
+  if (event.type === "invoice.payment_succeeded") {
     await db
       .update(logos)
       .set({

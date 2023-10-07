@@ -1,17 +1,18 @@
-// 'use client'
+import { CldImage } from "next-cloudinary";
 
-// import Image from "next/image";
+export function WatermarkImage({logoUrl}: any): JSX.Element {
 
-// type Props = {
-//   src: string;
-// };
+  return (
+      <CldImage
+        deliveryType="fetch"
+        width={500}
+        height={500}
+        src={logoUrl}
+        alt="test"
+        loading="lazy"
+        blur="30"
+      />
+  );
+}
 
-// const WatermarkComponents = ({ src }: Props) => {
-//   return (
-//     <div>
-//         <Image src={src} alt="" width={500} height={500} />
-//     </div>
-//   );
-// };
-
-// export default WatermarkComponents;
+export default WatermarkImage;
