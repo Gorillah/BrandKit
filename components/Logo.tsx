@@ -14,12 +14,13 @@ type Props = {
   companyName: string;
   logoId: string;
   isPaid: number;
+  isSub: boolean;
 };
 
-const Logo = ({ logoUrl, companyName, logoId, isPaid }: Props) => {
+const Logo = ({ logoUrl, companyName, logoId, isPaid, isSub }: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
- 
+
   useEffect(() => {
     if (loading) {
       const interval = setInterval(() => {
@@ -47,6 +48,7 @@ const Logo = ({ logoUrl, companyName, logoId, isPaid }: Props) => {
               </Link>
             </div>
             <WatermarkLogo
+              isSub={isSub}
               logoId={logoId}
               logoUrl={logoUrl}
               companyName={companyName}

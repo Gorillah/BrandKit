@@ -5,6 +5,7 @@ import { and, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import Logo from "@/components/Logo";
 import { Metadata } from "next";
+import { checkSubscription } from "@/lib/subscription";
 
 export const metadata: Metadata = {
   title: "Logo Maker",
@@ -18,6 +19,8 @@ type Props = {
 };
 
 const LogoPage = async ({ params: { logoId } }: Props) => {
+
+  const isSub = await checkSubscription();
 
   const { userId } = auth();
   if (!userId) return redirect("/");
@@ -35,7 +38,7 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
   const logo = logoSelect[0];
   return (
     <div className="min-h-screen container flex items-center justify-center">
-      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} isPaid={logo.isPaid}/>
+      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} isPaid={logo.isPaid} isSub={isSub} />
     </div>
   );
 };

@@ -3,15 +3,20 @@ import { Button } from "./ui/button";
 import useDownloader from "react-use-downloader";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { checkSubscription } from "@/lib/subscription";
 
 type result = {
   logoUrl: string;
   companyName: string;
   isPaid: number;
   logoId: string;
+  isSub: boolean;
 };
 
 export function WatermarkLogo({
+  isSub,
   logoId,
   logoUrl,
   companyName,
@@ -29,14 +34,22 @@ export function WatermarkLogo({
     id = s1.substring(1);
   }
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handlePayment = async () => {
     try {
-      const res = await axios.get("/api/stripe");
-      window.location.href = res.data.url;
+      setIsLoading(true);
+      if (!isSub) {
+        const res = await axios.get("/api/stripe");
+        window.location.href = res.data.url;
+      }
+      console.log("downloading");
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     } finally {
-      router.push("/");
+      setIsLoading(false);
     }
   };
 
@@ -50,7 +63,8 @@ export function WatermarkLogo({
               <Button onClick={() => download(logoUrl, companyName + ".jpg")}>
                 Download Free
               </Button>
-              <Button onClick={handlePayment} disabled>
+              <Button onClick={handlePayment} disabled={isLoading}>
+                {isLoading && <Loader2 className="animate-spin" />}
                 Download Premium
               </Button>
             </div>
