@@ -10,21 +10,22 @@ export async function POST(req: Request) {
   const body = await req.text();
   const signature = headers().get("Stripe-Signature") as string;
   let event: Stripe.Event;
-
+  
   try {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
       process.env.STRIPE_WEBHOOK_SIGNING_SECRET as string
-    );
-  } catch (error) {
-    return new NextResponse("webhook error", {
-      status: 400,
-    });
-}
-
-const session = event.data.object as Stripe.Checkout.Session;
-  if (event.type === "invoice.payment_succeeded") {
+      );
+    } catch (error) {
+      return new NextResponse("webhook error", {
+        status: 400,
+      });
+    }
+    
+    const session = event.data.object as Stripe.Checkout.Session;
+    if(!session?.metadata?.logoId!) return new NextResponse("Metadata logoId Not found", { status: 404 });
+  if (event.type === "checkout.session.completed") {
     await db
       .update(logos)
       .set({

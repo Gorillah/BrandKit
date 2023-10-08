@@ -1,12 +1,8 @@
-// import { clerk } from "@/db/clerk.server";
-import { Button } from "@/components/ui/button";
 import { logos } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
-import Image from "next/image";
 import { redirect } from "next/navigation";
-import useDownloader from "react-use-downloader";
 import Logo from "@/components/Logo";
 import { Metadata } from "next";
 
@@ -15,7 +11,6 @@ export const metadata: Metadata = {
   description: "Generate your perfect logo simply with BrandKit",
 };
 
-
 type Props = {
   params: {
     logoId: string;
@@ -23,11 +18,9 @@ type Props = {
 };
 
 const LogoPage = async ({ params: { logoId } }: Props) => {
+
   const { userId } = auth();
   if (!userId) return redirect("/");
-
-  // Access clerk backend and get the user
-  // const user = await clerk.users.getUser(userId);
 
   // Get Selected Logo with Id, and UserId
   const logoSelect = await db
@@ -39,11 +32,10 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
         eq(logos.userId, userId) // Created by current user
       )
     );
-  if (logoSelect.length != 1) return redirect("/");
   const logo = logoSelect[0];
   return (
     <div className="min-h-screen container flex items-center justify-center">
-      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} isPaid={logo.isPaid!}/>
+      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} isPaid={logo.isPaid}/>
     </div>
   );
 };

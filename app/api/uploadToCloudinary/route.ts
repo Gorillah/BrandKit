@@ -1,8 +1,8 @@
 import { logos } from "@/db/schema";
 import { db } from "@/lib/db";
-import { uploadFileToFirebase } from "@/lib/firebase";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
+import axios from "axios";
 
 export async function POST(req: Request) {
   try {
@@ -13,14 +13,22 @@ export async function POST(req: Request) {
       .where(eq(logos.id, parseInt(id)));
     if (!logo[0].logoUrl)
       return NextResponse.json("Not found", { status: 404 });
-    const firebase_url = await uploadFileToFirebase(
-      logo[0].logoUrl,
-      logo[0].companyName
+
+    const formData = new FormData();
+    formData.append("file", logo[0].logoUrl);
+    formData.append("upload_preset", "BrandKit");
+
+    const res = await axios.post(
+      "https://api.cloudinary.com/v1_1/dkarnkl8i/image/upload",
+      formData,
+      { headers: { "Content-Type": "multipart/form-data" } }
     );
+    // console.log("res===============================", res.data);
+
     await db
       .update(logos)
       .set({
-        logoUrl: firebase_url,
+        logoUrl: res.data.url,
       })
       .where(eq(logos.id, parseInt(id)));
     return NextResponse.json(true, { status: 200 });

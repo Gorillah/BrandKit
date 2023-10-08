@@ -8,6 +8,8 @@ import {
   datetime,
   tinyint,
   unique,
+  serial,
+  timestamp,
 } from "drizzle-orm/mysql-core";
 import { sql } from "drizzle-orm";
 
@@ -47,3 +49,16 @@ export const users = mysqlTable(
     };
   }
 );
+
+export const userSubscriptions = mysqlTable("user_subscriptions", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id", { length: 255 }).notNull().unique(),
+  stripeCustomerId: varchar("stripe_customer_id", { length: 255 })
+    .notNull()
+    .unique(),
+  stripeSubscriptionId: varchar("stripe_subscription_id", {
+    length: 255,
+  }).unique(),
+  stripePriceId: varchar("stripe_price_id", { length: 255 }),
+  stripeCurrentPeriodEnd: timestamp("stripe_current_period_end"),
+});

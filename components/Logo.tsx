@@ -1,18 +1,13 @@
 "use client";
 
-import { Button } from "./ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
-import axios from "axios";
-import { WatermarkImage } from "@/components/watermark";
-
-
-import { ref, getDownloadURL } from "firebase/storage";
-import { storage } from "@/lib/firebase";
-
+import { useEffect, useState } from "react";
+import WatermarkLogo from "@/components/watermark";
+import Lottie from "react-lottie-player";
 import React from "react";
-import useDownloader from "react-use-downloader";
+import lottieJson from "@/public/animation_lngjrw7e.json";
+import { useRouter } from "next/navigation";
 
 type Props = {
   logoUrl: string;
@@ -22,51 +17,44 @@ type Props = {
 };
 
 const Logo = ({ logoUrl, companyName, logoId, isPaid }: Props) => {
-
-  const { size, elapsed, percentage, download, cancel, error, isInProgress } =
-    useDownloader();
-
-  const fileUrl =
-    'https://res.cloudinary.com/dkarnkl8i/image/fetch/v1696637993/https://firebasestorage.googleapis.com/v0/b/brandkit-74ae6.appspot.com/o/IstanbulGoodies1696602897743.jpg%3Falt%3Dmedia%26token%3Dab017fe2-8ec5-47bb-82cc-f84a1afc8a3b';
-  const filename = 'beautiful-carpathia.jpg';
-
-  const [loading, setLoading] = useState(false);
-
-  const handlePayment = async () => {
-    if (isPaid) {
-      console.log("download");
-      return;
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+ 
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        if (logoUrl.includes("http://res.cloudinary.com")) {
+          setLoading(false);
+        } else {
+          router.refresh();
+        }
+      }, 1500);
     }
-    try {
-      setLoading(true);
-      console.log("components/logo.tsx", logoId);
-      const response = await axios.post("/api/stripe", logoId);
-      window.location.href = response.data.url;
-    } catch (error) {
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [loading, logoUrl]);
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="w-full">
-        <Link href={"/logo"}>
-          <ArrowLeft />
-        </Link>
-      </div>
-      <WatermarkImage logoUrl={logoUrl} />
-      <div className="flex gap-2 justify-between">
-        <Button>Download Free</Button>
-        <Button onClick={handlePayment} variant={"secondary"}>
-          Download Premium
-        </Button>
-      </div>
-      <Button onClick={() => download(fileUrl, filename)}>
-        {loading ? "Downloading..." : ""}
-        Click to download the file
-      </Button>
+    <div>
+      {loading ? (
+        <div>
+          <Lottie loop={true} play={true} animationData={lottieJson} />
+        </div>
+      ) : (
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-full">
+              <Link href={"/logo"}>
+                <ArrowLeft />
+              </Link>
+            </div>
+            <WatermarkLogo
+              logoId={logoId}
+              logoUrl={logoUrl}
+              companyName={companyName}
+              isPaid={isPaid}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

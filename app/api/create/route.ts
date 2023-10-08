@@ -5,7 +5,6 @@ import { auth } from "@clerk/nextjs";
 import { generateLogo, generateLogoPrompt } from "@/lib/openai";
 import { db } from "@/lib/db";
 import { logos } from "@/drizzle/schema";
-import { redirect } from "next/navigation";
 
 // export const runtime = "edge";
 
@@ -45,6 +44,8 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+
+  console.log(logo_description);
 
   // Generate logo using the description
   const logo_url = await generateLogo(logo_description);

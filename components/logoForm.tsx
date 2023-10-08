@@ -16,6 +16,9 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Lottie from "react-lottie-player";
+import lottieJson from "@/public/animation_lngjrw7e.json";
+import { create } from "domain";
 
 export default function FormCard() {
   const router = useRouter();
@@ -44,9 +47,18 @@ export default function FormCard() {
     clearCompany();
   }, []);
 
-  const uploadToFirebase = useMutation({
+  // const uploadToFirebase = useMutation({
+  //   mutationFn: async (id: string) => {
+  //     const response = await axios.post("/api/uploadToFirebase", {
+  //       id,
+  //     });
+  //     return response.data;
+  //   },
+  // });
+
+  const uploadToCloudinary = useMutation({
     mutationFn: async (id: string) => {
-      const response = await axios.post("/api/uploadToFirebase", {
+      const response = await axios.post("/api/uploadToCloudinary", {
         id,
       });
       return response.data;
@@ -68,7 +80,8 @@ export default function FormCard() {
   const handleSubmit = async () => {
     createLogo.mutate(undefined, {
       onSuccess: ({ id }) => {
-        uploadToFirebase.mutate(id);
+        // uploadToFirebase.mutate(id);
+        uploadToCloudinary.mutate(id);
         router.push(`/logo/${id}`);
       },
       onError: (error) => {
@@ -103,9 +116,9 @@ export default function FormCard() {
         <div className="transition transform duration-500 slide-in-left">
           {pages[page]}
         </div>
-        <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
+        {!createLogo.isLoading && <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
           <Button
-          variant={"default"}
+            variant={"default"}
             className={cn(
               "h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl",
               createLogo.isLoading && "hidden"
@@ -126,12 +139,11 @@ export default function FormCard() {
             )}
             {page === 2 ? "Generate" : "Next"}
           </Button>
-        </div>
+        </div>}
       </div>
       {createLogo.isLoading && (
         <div className="flex justify-center items-center">
-          <Loader2 className="animate-spin" size={40} />
-          <p>Generating Logo ...</p>
+          <Lottie loop={true} play={true} animationData={lottieJson} />
         </div>
       )}
     </div>

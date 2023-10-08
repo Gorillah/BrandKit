@@ -4,6 +4,7 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 import {
   Sheet,
   SheetContent,
@@ -12,21 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-const routes = [
-  {
-    label: "Dashboard",
-    href: "/aa",
-  },
-  {
-    label: "Price",
-    href: "/price",
-  },
-  {
-    label: "Help",
-    href: "/help",
-  },
-];
+import HeaderMenu from "@/components/HeaderMenu";
 
 export default function Navbar() {
   const { userId } = auth();
@@ -42,15 +29,7 @@ export default function Navbar() {
           style={{ objectFit: "contain", width: "100%", height: "100%" }}
         />
       </Link>
-      <div className="hidden md:flex">
-        {routes.map((route) => (
-          <Link key={route.href} href={route.href}>
-            <Button className="text-white text-lg" variant={"link"}>
-              {route.label}
-            </Button>
-          </Link>
-        ))}
-      </div>
+      <HeaderMenu />
       <div className="hidden md:flex text-black justify-end w-36">
         {!userId ? (
           <div className="flex gap-2">
@@ -62,7 +41,7 @@ export default function Navbar() {
             </Link>
           </div>
         ) : (
-          <UserButton afterSignOutUrl="/"  />
+          <UserButton afterSignOutUrl="/" />
         )}
       </div>
       <div className="md:hidden text-lg flex items-center">
@@ -71,12 +50,7 @@ export default function Navbar() {
             <Menu className="text-white" />
           </SheetTrigger>
           <SheetContent className="flex flex-col gap-1">
-            <Link href={"/s"}>
-              <Button variant={"link"}>LOGO</Button>
-            </Link>
-            <Link href={"/s"}>
-              <Button variant={"link"}>LOGO</Button>
-            </Link>
+            <HeaderMenu />
           </SheetContent>
         </Sheet>
       </div>

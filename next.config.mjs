@@ -12,6 +12,7 @@ export default withPlaiceholder({
     domains: [
       "oaidalleapiprodscus.blob.core.windows.net",
       "firebasestorage.googleapis.com",
+      'res.cloudinary.com'
     ]
   },
   typescript: {
