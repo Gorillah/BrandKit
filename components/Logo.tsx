@@ -13,11 +13,10 @@ type Props = {
   logoUrl: string;
   companyName: string;
   logoId: string;
-  isPaid: number;
   isSub: boolean;
 };
 
-const Logo = ({ logoUrl, companyName, logoId, isPaid, isSub }: Props) => {
+const Logo = ({ logoUrl, companyName, logoId, isSub }: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
 
@@ -41,20 +40,12 @@ const Logo = ({ logoUrl, companyName, logoId, isPaid, isSub }: Props) => {
         </div>
       ) : (
         <div className="flex flex-col items-center gap-4">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-full">
-              <Link href={"/logo"}>
-                <ArrowLeft />
-              </Link>
-            </div>
             <WatermarkLogo
               isSub={isSub}
               logoId={logoId}
               logoUrl={logoUrl}
               companyName={companyName}
-              isPaid={isPaid}
             />
-          </div>
         </div>
       )}
     </div>
