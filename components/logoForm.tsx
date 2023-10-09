@@ -116,30 +116,32 @@ export default function FormCard() {
         <div className="transition transform duration-500 slide-in-left">
           {pages[page]}
         </div>
-        {!createLogo.isLoading && <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
-          <Button
-            variant={"default"}
-            className={cn(
-              "h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl",
-              createLogo.isLoading && "hidden"
-            )}
-            onClick={() => {
-              if (page === 2 && fontStyle.length === 0) {
-                toast({
-                  title: "Please select at least one font",
-                });
-                return;
-              }
-              next();
-            }}
-            disabled={createLogo.isLoading}
-          >
-            {createLogo.isLoading && (
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            )}
-            {page === 2 ? "Generate" : "Next"}
-          </Button>
-        </div>}
+        {!createLogo.isLoading && (
+          <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
+            <Button
+              variant={"default"}
+              className={cn(
+                "h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl",
+                createLogo.isLoading && "hidden",
+              )}
+              onClick={() => {
+                if (page === 2 && fontStyle.length === 0) {
+                  toast({
+                    title: "Please select at least one font",
+                  });
+                  return;
+                }
+                next();
+              }}
+              disabled={createLogo.isLoading}
+            >
+              {createLogo.isLoading && (
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              )}
+              {page === 2 ? "Generate" : "Next"}
+            </Button>
+          </div>
+        )}
       </div>
       {createLogo.isLoading && (
         <div className="flex justify-center items-center">

@@ -39,7 +39,7 @@ function Color() {
               logoColor.includes(color)
                 ? "border-4 border-[#2F2FA2]"
                 : "border-4 border-transparent border-gray-200",
-              " hover:cursor-pointer transition flex justify-center items-center hover:scale-[102%] overflow-hidden rounded-[14px]"
+              " hover:cursor-pointer transition flex justify-center items-center hover:scale-[102%] overflow-hidden rounded-[14px]",
             )}
           >
             <div className="w-[550px]">

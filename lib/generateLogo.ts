@@ -8,7 +8,7 @@ export default async function generateImage(
   company: string,
   style: string[],
   color: string[],
-  font: string[]
+  font: string[],
 ): Promise<any> {
   try {
     const prompt = `
@@ -56,7 +56,7 @@ export default async function generateImage(
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
-      }
+      },
     );
 
     // Extract the image URL from the OpenAI API response data.

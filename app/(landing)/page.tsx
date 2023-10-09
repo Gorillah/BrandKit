@@ -135,7 +135,7 @@ export default function HomePage() {
             <div
               className={cn(
                 idx % 2 === 0 ? "flex-row" : "flex-row-reverse md:flex-row",
-                "w-full flex gap-2 px-6 min-h-[200px] rounded-lg text-white bg-[#2127b3] shadow-md shadow-black/50"
+                "w-full flex gap-2 px-6 min-h-[200px] rounded-lg text-white bg-[#2127b3] shadow-md shadow-black/50",
               )}
               key={idx}
             >

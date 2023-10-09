@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const res = await axios.post(
       "https://api.cloudinary.com/v1_1/dkarnkl8i/image/upload",
       formData,
-      { headers: { "Content-Type": "multipart/form-data" } }
+      { headers: { "Content-Type": "multipart/form-data" } },
     );
     // console.log("res===============================", res.data);
 

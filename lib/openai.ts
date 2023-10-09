@@ -14,7 +14,7 @@ export async function generateLogoPrompt(dataFrom: formData) {
         {
           role: "system",
           content:
-            "You are a helpful assistant. Your role is to generate clear, detailed text prompts that will be used as inputs for an AI image generation system. The goal is to produce high-quality logo images based on the user's preferences For example, if a user provides the company name 'Sunny Skies Solar', specifies the colors blue and yellow, requests a modern geometric style, and wants the modern font"
+            "You are a helpful assistant. Your role is to generate clear, detailed text prompts that will be used as inputs for an AI image generation system. The goal is to produce high-quality logo images based on the user's preferences For example, if a user provides the company name 'Sunny Skies Solar', specifies the colors blue and yellow, requests a modern geometric style, and wants the modern font",
         },
         {
           role: "user",

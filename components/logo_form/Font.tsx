@@ -38,7 +38,7 @@ function Font() {
               fontStyle.includes(font)
                 ? "border-4 border-[#2F2FA2]"
                 : "border-4 border-transparent border-gray-200",
-              " hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px]"
+              " hover:cursor-pointer transition py-10 px-5 md:p-20 flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px]",
             )}
           >
             <Image

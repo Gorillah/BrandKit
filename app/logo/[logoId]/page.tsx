@@ -19,7 +19,6 @@ type Props = {
 };
 
 const LogoPage = async ({ params: { logoId } }: Props) => {
-
   const isSub = await checkSubscription();
 
   const { userId } = auth();
@@ -32,13 +31,19 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
     .where(
       and(
         eq(logos.id, parseInt(logoId)), // Id matches
-        eq(logos.userId, userId) // Created by current user
-      )
+        eq(logos.userId, userId), // Created by current user
+      ),
     );
   const logo = logoSelect[0];
   return (
     <div className="min-h-screen container flex items-center justify-center">
-      <Logo logoUrl={logo.logoUrl} companyName={logo.companyName} logoId={logoId} isPaid={logo.isPaid} isSub={isSub} />
+      <Logo
+        logoUrl={logo.logoUrl}
+        companyName={logo.companyName}
+        logoId={logoId}
+        isPaid={logo.isPaid}
+        isSub={isSub}
+      />
     </div>
   );
 };

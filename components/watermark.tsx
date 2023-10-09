@@ -1,11 +1,10 @@
+import useDownloader from "react-use-downloader";
+import axios from "axios";
 import { CldImage } from "next-cloudinary";
 import { Button } from "./ui/button";
-import useDownloader from "react-use-downloader";
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { checkSubscription } from "@/lib/subscription";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type result = {
   logoUrl: string;
@@ -56,9 +55,20 @@ export function WatermarkLogo({
   return (
     <div>
       <div>
-        {url.includes("http://res.cloudinary.com") && (
+        {url.includes(
+          "http://res.cloudinary.com" ||
+            "https://res.cloudinary.com" ||
+            "res.cloudinary"
+        ) && (
           <div>
-            <CldImage width={500} height={500} src={id} alt="test" priority />
+            <CldImage
+              sizes="(max-width: 768px) 100vw,
+          (max-width: 1200px) 50vw,
+          33vw"
+              src={id}
+              alt="test"
+              priority
+            />
             <div className="flex gap-2 justify-center">
               <Button onClick={() => download(logoUrl, companyName + ".jpg")}>
                 Download Free

@@ -8,8 +8,6 @@ import { LayoutDashboard } from "lucide-react";
 import { Button } from "./ui/button";
 import HeaderMenu from "@/components/HeaderMenu";
 
-
-
 export default function Navbar() {
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
@@ -20,7 +18,7 @@ export default function Navbar() {
           </div>
         </Link>
         <div className="space-y-1">
-         <HeaderMenu />
+          <HeaderMenu />
         </div>
       </div>
     </div>

@@ -5,18 +5,21 @@ import { useFormData } from "@/store/createLogo";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-import { storage } from '@/lib/firebase'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { storage } from "@/lib/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export default function Generate() {
   const formData = useFormData();
   const router = useRouter();
-    const uploadFile = async () => {
-      const fileRef = ref(storage, 'gs://brandkit-74ae6.appspot.com/Fiero1696493494328.jpg')  
-      await uploadBytes(fileRef, file)
-      
-      const url = await getDownloadURL(fileRef)
-      // use url 
-    }
+  const uploadFile = async () => {
+    const fileRef = ref(
+      storage,
+      "gs://brandkit-74ae6.appspot.com/Fiero1696493494328.jpg",
+    );
+    await uploadBytes(fileRef, file);
+
+    const url = await getDownloadURL(fileRef);
+    // use url
+  };
 
   async function logoGeneration() {
     const res = axios.post("/api/create");

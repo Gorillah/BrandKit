@@ -47,17 +47,13 @@
       "compositePrimaryKeys": {
         "logos_id": {
           "name": "logos_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "indexes": {
         "user_id_idx": {
           "name": "user_id_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         }
       },
@@ -100,9 +96,7 @@
       "compositePrimaryKeys": {
         "users_id": {
           "name": "users_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "indexes": {},
@@ -110,9 +104,7 @@
       "uniqueConstraints": {
         "email": {
           "name": "email",
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       }
     }

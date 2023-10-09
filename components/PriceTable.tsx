@@ -67,12 +67,16 @@ export default function PriceTable() {
             className={cn(
               "flex flex-col justify-around",
               plan.color,
-              plan.textColor
+              plan.textColor,
             )}
           >
             <CardHeader>
-              <CardTitle className="text-5xl">{plan.price}</CardTitle>
-              <CardTitle className="text-4xl">{plan.name}</CardTitle>
+              <CardTitle className="text-5xl text-slate-950">
+                {plan.price}
+              </CardTitle>
+              <CardTitle className="text-4xl text-slate-950">
+                {plan.name}
+              </CardTitle>
               <CardDescription className={cn("text-xl", plan.textColor)}>
                 {plan.description}
               </CardDescription>

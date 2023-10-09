@@ -36,7 +36,7 @@ const HeaderMenu = () => {
           key={route.href}
           href={route.href}
           className={cn(
-            userId === null && route.authReq == true ? "hidden" : ""
+            userId === null && route.authReq == true ? "hidden" : "",
           )}
         >
           <Button className="text-white text-lg" variant={"link"}>

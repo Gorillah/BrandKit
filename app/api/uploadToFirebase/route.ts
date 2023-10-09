@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       return NextResponse.json("Not found", { status: 404 });
     const firebase_url = await uploadFileToFirebase(
       logo[0].logoUrl,
-      logo[0].companyName
+      logo[0].companyName,
     );
     await db
       .update(logos)

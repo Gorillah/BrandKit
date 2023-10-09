@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 const AddLogo = () => {
   const router = useRouter();
   return (
-    <Button onClick={() => router.push("/")} className="w-full h-full" variant={"outline"}>
+    <Button
+      onClick={() => router.push("/")}
+      className="w-full h-full"
+      variant={"outline"}
+    >
       <Plus size={80} />
     </Button>
   );

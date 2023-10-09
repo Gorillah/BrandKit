@@ -15,4 +15,4 @@ type formData = {
   fontStyle: string[];
   logoStyle: string[];
   logoColor: string[];
-}
+};

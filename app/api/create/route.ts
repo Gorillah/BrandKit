@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
   if (!logo_description) {
     return NextResponse.json(
       { error: "failed to generate logo description" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
   if (!logo_url) {
     return NextResponse.json(
       { error: "failed to generate logo" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 

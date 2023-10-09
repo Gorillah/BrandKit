@@ -42,7 +42,7 @@ function Style() {
               logoStyle.includes(style)
                 ? "border-4 border-[#2F2FA2]"
                 : "border-4 border-transparent ",
-              " hover:cursor-pointer transition flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px] min-w-[170px]"
+              " hover:cursor-pointer transition flex justify-center items-center bg-gray-200 outline-none hover:scale-[102%] overflow-hidden rounded-[14px] min-w-[170px]",
             )}
           >
             <AspectRatio ratio={1 / 1}>

@@ -5,11 +5,4 @@ import hero from "../public/fontShowcase/HERO_MAX_JS_12_10_2021.jpg";
 import brand from "../public/fontShowcase/brand.jpg";
 import doggy from "../public/fontShowcase/21145832_9.jpg";
 
-export const LogoShowcaseArray = [
-    banana,
-    monkey,
-    candy,
-    brand,
-    hero,
-    doggy,
-  ];
+export const LogoShowcaseArray = [banana, monkey, candy, brand, hero, doggy];
