@@ -16,6 +16,8 @@ import showcase from "@/public/showcase.png";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { BadgeHelp, Blocks, Bot, FileStack } from "lucide-react";
+import PriceTable from "@/components/PriceTable";
+import Qna from "@/components/Qna";
 
 const features = [
   {
@@ -57,7 +59,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col space-y-10">
+    <div className="flex flex-col space-y-10 gap-4">
       <div className="h-fit flex flex-col bg-[#2127b3] text-white py-20">
         <div className="container flex items-center justify-center lg:justify-between h-full">
           <div className="flex flex-col gap-y-6 w-[500px]">
@@ -119,7 +121,7 @@ export default function HomePage() {
 
       <LogoShowcase />
 
-      <div className="container flex flex-col gap-7">
+      <div className="container flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <h3 className="text-3xl font-bold text-center">Brand Logo Design</h3>
           <p className="max-w-2xl text-center text-lg lg:text-xl mx-auto">
@@ -148,6 +150,8 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+      <Qna />
+      <PriceTable />
       <Footer />
     </div>
   );

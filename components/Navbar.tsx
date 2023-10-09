@@ -4,7 +4,6 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import {
   Sheet,
   SheetContent,

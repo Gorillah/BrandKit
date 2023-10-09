@@ -13,8 +13,13 @@ const HeaderMenu = () => {
       authReq: true,
     },
     {
+      label: "Faq",
+      href: "/#faq",
+      authReq: true,
+    },
+    {
       label: "Price",
-      href: "/price",
+      href: "/#price",
       authReq: false,
     },
     {
