@@ -65,9 +65,9 @@ export default function PriceTable() {
           <Card
             key={index}
             className={cn(
-              "flex flex-col justify-around",
+              "flex flex-col justify-around shadow-md shadow-black/30",
               plan.color,
-              plan.textColor,
+              plan.textColor
             )}
           >
             <CardHeader>

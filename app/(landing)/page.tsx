@@ -64,7 +64,7 @@ export default function HomePage() {
         <div className="container flex items-center justify-center lg:justify-between h-full">
           <div className="flex flex-col gap-y-6 w-[500px]">
             <h1 className="text-6xl font-bold">Make a logo with BrandKit</h1>
-            <h2 className="font-medium text-xl">
+            <h2 className="font-medium text-xl h-4">
               <TypewriterTitle />
             </h2>
             <p className="text-lg">
@@ -118,9 +118,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
       <LogoShowcase />
-
       <div className="container flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <h3 className="text-3xl font-bold text-center">Brand Logo Design</h3>
@@ -135,7 +133,7 @@ export default function HomePage() {
             <div
               className={cn(
                 idx % 2 === 0 ? "flex-row" : "flex-row-reverse md:flex-row",
-                "w-full flex gap-2 px-6 min-h-[200px] rounded-lg text-white bg-[#2127b3] shadow-md shadow-black/50",
+                "w-full flex gap-2 px-6 min-h-[200px] rounded-lg text-white bg-[#2127b3] shadow-md shadow-black/50"
               )}
               key={idx}
             >

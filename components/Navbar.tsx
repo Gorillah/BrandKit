@@ -6,6 +6,7 @@ import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -15,15 +16,42 @@ import {
 import HeaderMenu from "@/components/HeaderMenu";
 
 export default function Navbar() {
+  const routes = [
+    {
+      label: "My Logos",
+      href: "/logo",
+      authReq: true,
+    },
+    {
+      label: "Faq",
+      href: "/#faq",
+      authReq: true,
+    },
+    {
+      label: "Price",
+      href: "/#price",
+      authReq: false,
+    },
+    {
+      label: "Help",
+      href: "/help",
+      authReq: false,
+    },
+  ];
+
   const { userId } = auth();
   return (
     <div className="h-16 flex size-icon p-4 shadow-md bg-primary justify-between">
-      <Link className="text-white relative w-36 h-8 justify-start" href={"/"}>
+      <Link
+        className="text-white relative w-36 h-8 py-2 justify-start"
+        href={"/"}
+      >
         <Image
           src="/brandkit_01.webp"
           className="flex justify-center items-center"
-          alt="Logo"
+          alt="BrandKit Logo"
           fill
+          priority
           sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"
           style={{ objectFit: "contain", width: "100%", height: "100%" }}
         />
@@ -48,8 +76,12 @@ export default function Navbar() {
           <SheetTrigger>
             <Menu className="text-white" />
           </SheetTrigger>
-          <SheetContent className="flex flex-col gap-1">
-            <HeaderMenu />
+          <SheetContent className="flex flex-col gap-2 pt-20 text-lg">
+            {routes.map((route, i) => (
+              <SheetClose asChild key={i}>
+                <Link href={route.href}>{route.label}</Link>
+              </SheetClose>
+            ))}
           </SheetContent>
         </Sheet>
       </div>

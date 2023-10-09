@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import Logo from "@/components/Logo";
 import { Metadata } from "next";
 import { checkSubscription } from "@/lib/subscription";
-import LoogNavbar from "@/components/LogoNavbra";
+import LogoNavbar from "@/components/LogoNavbra";
 
 export const metadata: Metadata = {
   title: "Logo Maker",
@@ -37,14 +37,14 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
     );
   const logo = logoSelect[0];
   return (
-    <div>
-      <LoogNavbar
+    <div className="min-h-screen">
+      <LogoNavbar
         logoUrl={logo.logoUrl}
         companyName={logo.companyName}
         logoId={logoId}
         isSub={isSub}
       />
-      <div className="min-h-screen container flex items-center justify-center">
+      <div className="container flex items-center justify-center mt-24">
         <Logo
           logoUrl={logo.logoUrl}
           companyName={logo.companyName}

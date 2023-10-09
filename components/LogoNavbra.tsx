@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowDownToLine, ArrowLeft, Menu } from "lucide-react";
+import Image from "next/image";
 import {
   Sheet,
   SheetClose,
@@ -43,8 +44,12 @@ export default function LogoNavbar({
   if (url.includes("http://res.cloudinary.com")) {
     const regex = /\/logos\/(.*)/;
     const match = url.match(regex);
-    const s1 = match[0].split(".png")[0];
-    id = s1.substring(1);
+    if (match) {
+      const s1 = match[0].split(".png")[0];
+      id = s1.substring(1);
+    } else {
+      console.warn("No match found for the given URL.");
+    }
   }
 
   const [isLoading, setIsLoading] = useState(false);
@@ -68,7 +73,6 @@ export default function LogoNavbar({
   const [quality, setQuality] = useState([525]); // Keep as an array
   const [watermark, setWatermark] = useState(false);
   const [loading, setLoading] = useState(true);
-  console.log(watermark);
 
   useEffect(() => {
     if (loading) {
@@ -85,23 +89,20 @@ export default function LogoNavbar({
   return (
     <>
       <div className="px-4 h-16 bg-primary flex items-center justify-between">
+        <Link className="text-white relative w-36 h-8 justify-start" href={"/"}>
+          <Image
+            src="/brandkit_01.webp"
+            className="flex justify-center items-center"
+            alt="Logo"
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"
+            style={{ objectFit: "contain", width: "100%", height: "100%" }}
+          />
+        </Link>
         <Sheet>
-          <SheetTrigger>
-            <Menu color="white" />
-          </SheetTrigger>
-          <SheetContent side={"left"}>
-            <SheetHeader>
-              <SheetTitle>Are you sure absolutely sure?</SheetTitle>
-              <SheetDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </SheetDescription>
-            </SheetHeader>
-          </SheetContent>
-        </Sheet>
-        <Sheet>
-          <SheetTrigger>
-            <ArrowDownToLine color="white" />
+          <SheetTrigger className="bg-white px-3 py-2 rounded-md">
+            <ArrowDownToLine color="blue" />
           </SheetTrigger>
           <SheetContent side={"bottom"}>
             <div className="flex flex-col mb-10">
@@ -125,13 +126,15 @@ export default function LogoNavbar({
             </div>
             <SheetFooter>
               <SheetClose asChild>
-                <Button type="submit">Download</Button>
+                <Button type="submit" onClick={handlePayment}>
+                  Download
+                </Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
-      <div className="container mx-auto py-6">
+      <div className="container mx-auto py-6 flex justify-between items-center">
         <Link href={"/logo"}>
           <ArrowLeft />
         </Link>

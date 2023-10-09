@@ -1,10 +1,6 @@
-import useDownloader from "react-use-downloader";
 import axios from "axios";
 import { CldImage } from "next-cloudinary";
-import { Button } from "./ui/button";
-import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 type result = {
   logoUrl: string;
@@ -32,8 +28,12 @@ export function WatermarkLogo({
   ) {
     const regex = /\/logos\/(.*)/;
     const match = url.match(regex);
-    const s1 = match[0].split(".png")[0];
-    id = s1.substring(1);
+    if (match) {
+      const s1 = match[0].split(".png")[0];
+      id = s1.substring(1);
+    } else {
+      console.warn("No match found for the given URL.");
+    }
   }
 
   return (
