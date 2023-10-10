@@ -17,45 +17,51 @@ export default function PriceTable() {
   const plans = [
     {
       name: "Starter",
-      price: "$0",
+      price: Yearly ? "$5" : "$8",
       description: "1 Logo, 1 Social Media Post",
       color: "bg-gray-200",
       textColor: "text-black",
       features: [
-        "2 Daily Logos Generation Limit",
+        "Limited logo designs per month (12 logos)",
         "525 x 525px Quality Logo",
-        "Watermarked Logo",
+        "Commercial use license",
+        "Advanced customization options",
       ],
     },
     {
       name: "Basic",
-      price: Yearly ? "$6" : "$11",
+      price: Yearly ? "$9" : "$15",
       description: "1 Logo, 1 Social Media Post",
       color: "bg-gray-200",
       textColor: "text-black",
       features: [
-        "25 Daily Generation Limit",
-        "High Quality Logo",
-        "Watermarked Removed",
+        "Limited logo designs per month (40 logos)",
+        "1500 x 1500px Quality Logo",
+        "Commercial use license",
+        "Advanced customization options",
       ],
     },
     {
       name: "Premium",
-      price: Yearly ? "$12" : "$20",
+      price: Yearly ? "$15" : "$25",
       color: "bg-gray-200",
       textColor: "text-black",
       description: "1 Logo, 1 Social Media Post",
       features: [
-        "Unlimited Daily Generation Limit",
+        "Unlimited logo designs per month",
         "Highest Quality Logo",
-        "Watermarked Removed",
+        "Extended commercial use license",
+        "Advanced customization options",
+        "White-labeling options",
+        "Priority support",
+        "Premium design templates",
       ],
     },
   ];
 
   return (
     <div id="price" className="flex flex-col gap-4">
-      <div className="flex justify-center gap-4 place-items-baseline">
+      <div className="flex justify-center gap-4 items-center">
         <p className="text-2xl text-bold">Monthly</p>
         <Switch checked={Yearly} onCheckedChange={() => setYearly(!Yearly)} />
         <p className="text-2xl text-bold">Yearly</p>
@@ -73,13 +79,11 @@ export default function PriceTable() {
             <CardHeader>
               <CardTitle className="text-5xl text-slate-950">
                 {plan.price}
+                <span className="text-sm font-light">/ Monthly</span>
               </CardTitle>
               <CardTitle className="text-4xl text-slate-950">
                 {plan.name}
               </CardTitle>
-              <CardDescription className={cn("text-xl", plan.textColor)}>
-                {plan.description}
-              </CardDescription>
             </CardHeader>
             <CardContent>
               <ul className="flex flex-col gap-2 text-lg">

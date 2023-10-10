@@ -15,7 +15,7 @@ import LogoShowcase from "@/components/logoShowcase";
 import showcase from "@/public/showcase.png";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
-import { BadgeHelp, Blocks, Bot, FileStack } from "lucide-react";
+import { BadgeHelp, Blocks, Bot, FileStack, Loader2 } from "lucide-react";
 import PriceTable from "@/components/PriceTable";
 import Qna from "@/components/Qna";
 
@@ -99,6 +99,9 @@ export default function HomePage() {
                     disabled={isLoading}
                     className="col-span-12 lg:col-span-3 text-xl"
                   >
+                    {isLoading && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
                     Create
                   </Button>
                 </form>
@@ -112,6 +115,7 @@ export default function HomePage() {
                 className="animate-float"
                 alt="Logo"
                 fill
+                loading="lazy"
                 sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"
               />
             </AspectRatio>
