@@ -1,4 +1,11 @@
-import { Menu } from "lucide-react";
+import {
+  BadgeHelp,
+  CircleDollarSign,
+  HelpCircle,
+  LogIn,
+  Menu,
+  Shapes,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
@@ -20,31 +27,37 @@ const routes = [
   {
     label: "Login",
     href: "/sign-in",
+    img: LogIn,
     authReq: false,
   },
   {
-    label: "Regiester",
+    label: "Register",
     href: "/sign-up",
+    img: LogIn,
     authReq: false,
   },
   {
     label: "My Logos",
     href: "/logo",
+    img: Shapes,
     authReq: true,
   },
   {
     label: "Faq",
     href: "/#faq",
+    img: HelpCircle,
     authReq: false,
   },
   {
     label: "Price",
     href: "/#price",
+    img: CircleDollarSign,
     authReq: false,
   },
   {
     label: "Help",
     href: "/help",
+    img: BadgeHelp,
     authReq: false,
   },
 ];
@@ -65,21 +78,24 @@ export default function Navbar() {
           </SheetTrigger>
           <SheetContent
             side={"left"}
-            className="flex flex-col gap-2 pt-20 text-lg"
+            className="flex flex-col gap-y-2 pt-20 text-lg"
           >
             {routes.map((route, i) => (
-              <div
-                className={cn(
-                  userId && route.label === "Login" ? "hidden" : "",
-                  userId && route.label === "Regiester" ? "hidden" : "",
-                  !userId && route.authReq ? "hidden" : ""
-                )}
-                key={i}
-              >
-                <SheetClose asChild>
-                  <Link href={route.href}>{route.label}</Link>
-                </SheetClose>
-              </div>
+              <SheetClose asChild key={i}>
+                <Link href={route.href}>
+                  <div
+                    className={cn(
+                      "flex items-center gap-2 hover:bg-gray-200 py-2 pl-1 rounded-md font-semibold",
+                      userId && route.label === "Login" ? "hidden" : "",
+                      userId && route.label === "Register" ? "hidden" : "",
+                      !userId && route.authReq ? "hidden" : ""
+                    )}
+                  >
+                    <route.img />
+                    <div>{route.label}</div>
+                  </div>
+                </Link>
+              </SheetClose>
             ))}
           </SheetContent>
         </Sheet>
@@ -108,14 +124,14 @@ export default function Navbar() {
               <Button variant={"outline"}>Login</Button>
             </Link>
             <Link href={"/sign-up"}>
-              <Button variant={"secondary"}>Regie</Button>
+              <Button variant={"secondary"}>Register</Button>
             </Link>
           </div>
         ) : (
           <UserButton afterSignOutUrl="/" />
         )}
       </div>
-      <div className={cn(userId ? "flex" : "hidden")}>
+      <div className={cn(userId ? "flex" : "hidden", "md:hidden")}>
         <UserButton afterSignOutUrl="/" />
       </div>
     </div>

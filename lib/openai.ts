@@ -23,6 +23,7 @@ export async function generateLogoPrompt(dataFrom: formData) {
           `,
         },
       ],
+      max_tokens: 700,
     });
     const data = await response.json();
     const logo_description = data.choices[0].message.content;
@@ -40,6 +41,7 @@ export async function generateLogo(logo_description: string) {
       size: "256x256",
     });
     const data = await response.json();
+    console.log(data);
     const image_url = data.data[0].url;
     return image_url as string;
   } catch (error) {

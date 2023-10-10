@@ -35,20 +35,23 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
         eq(logos.userId, userId) // Created by current user
       )
     );
-  const logo = logoSelect[0];
+
+  const logoData = {
+    logoId: logoSelect[0].id.toString(), // Assuming id is a number and needs to be converted to string
+    companyName: logoSelect[0].companyName,
+    logoUrl: logoSelect[0].logoUrl,
+    logoPublicId: logoSelect[0].logoPublicId, // Assuming this property exists in logoSelect[0]
+    logoFormat: logoSelect[0].logoFormat,
+  };
+
   return (
     <div className="min-h-screen">
-      <LogoNavbar
-        logoUrl={logo.logoUrl}
-        companyName={logo.companyName}
-        logoId={logoId}
-        isSub={isSub}
-      />
+      <LogoNavbar {...logoData} isSub={isSub} />
       <div className="container flex items-center justify-center mt-24">
         <Logo
-          logoUrl={logo.logoUrl}
-          companyName={logo.companyName}
-          logoId={logoId}
+          logoUrl={logoData.logoUrl}
+          companyName={logoData.companyName}
+          logoId={logoData.logoId}
           isSub={isSub}
         />
       </div>

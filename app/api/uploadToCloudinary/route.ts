@@ -21,14 +21,17 @@ export async function POST(req: Request) {
     const res = await axios.post(
       "https://api.cloudinary.com/v1_1/dkarnkl8i/image/upload",
       formData,
-      { headers: { "Content-Type": "multipart/form-data" } },
+      { headers: { "Content-Type": "multipart/form-data" } }
     );
-    // console.log("res===============================", res.data);
+
+    console.warn(res.data);
 
     await db
       .update(logos)
       .set({
-        logoUrl: res.data.url,
+        logoUrl: res.data.secure_url,
+        logoPublicId: res.data.public_id,
+        logoFormat: res.data.format,
       })
       .where(eq(logos.id, parseInt(id)));
     return NextResponse.json(true, { status: 200 });

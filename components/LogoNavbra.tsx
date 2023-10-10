@@ -13,7 +13,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
-import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import QualitySlider from "@/components/QualitySlider";
@@ -23,19 +22,25 @@ import { useRouter } from "next/navigation";
 import useDownloader from "react-use-downloader";
 import axios from "axios";
 
-type Props = {
-  logoUrl: string;
-  companyName: string;
+type logo = {
   logoId: string;
+  companyName: string;
+  logoUrl: string;
+  logoPublicId: string;
+  logoFormat: string;
+};
+
+type Subscription = {
   isSub: boolean;
 };
 
 export default function LogoNavbar({
-  logoUrl,
+  logoFormat,
   companyName,
-  logoId,
+  logoUrl,
+  logoPublicId,
   isSub,
-}: Props) {
+}: logo & Subscription) {
   const { download } = useDownloader();
   const router = useRouter();
   let url = logoUrl;
@@ -60,8 +65,10 @@ export default function LogoNavbar({
       if (!isSub) {
         const res = await axios.get("/api/stripe");
         window.location.href = res.data.url;
+      } else {
+        console.log("downloading");
+        return () => download(logoUrl, companyName + "." + logoFormat);
       }
-      console.log("downloading");
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

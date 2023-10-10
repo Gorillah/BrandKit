@@ -12,7 +12,7 @@ export default async function Logo() {
   // parse to string
   if (!userId) return redirect("/");
   const logoSelect = await db.select().from(logos).where(
-    eq(logos.userId, userId) // Created by current user
+    eq(logos.userId, userId) // Logos created by current user
   );
   return (
     <div>
