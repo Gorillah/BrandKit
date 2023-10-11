@@ -21,7 +21,7 @@ import lottieJson from "@/public/animation_lngjrw7e.json";
 import { create } from "domain";
 
 export default function FormCard() {
-  const router = useRouter();
+  const router = useRouter()
 
   const { progress, setProgress } = useProgressBar();
   const { page, setPage } = useFormPage();
