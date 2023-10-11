@@ -80,7 +80,6 @@ export default function FormCard() {
   const handleSubmit = async () => {
     createLogo.mutate(undefined, {
       onSuccess: ({ id }) => {
-        // uploadToFirebase.mutate(id);
         uploadToCloudinary.mutate(id);
         router.push(`/logo/${id}`);
       },
@@ -118,9 +117,7 @@ export default function FormCard() {
     <div className="form flex flex-col space-y-4 pb-20">
       <Progress value={progress} className="w-full" />
       <div className="flex flex-col container">
-        <div className="transition transform duration-500 slide-in-left">
-          {pages[page]}
-        </div>
+        <div className="transition transform duration-500 slide-in-left">{pages[page]}</div>
         {!createLogo.isLoading && (
           <div className="flex justify-center fixed bottom-0 left-0 right-0 mx-auto pb-2">
             <Button
@@ -140,9 +137,7 @@ export default function FormCard() {
               }}
               disabled={createLogo.isLoading}
             >
-              {createLogo.isLoading && (
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              )}
+              {createLogo.isLoading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
               {page === 2 ? "Generate" : "Next"}
             </Button>
           </div>

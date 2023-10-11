@@ -13,10 +13,7 @@ export async function GET(request: Request) {
     const user = await currentUser();
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });
 
-    const _userSubscriptions = await db
-      .select()
-      .from(userSubscriptions)
-      .where(eq(userSubscriptions.userId, userId));
+    const _userSubscriptions = await db.select().from(userSubscriptions).where(eq(userSubscriptions.userId, userId));
 
     if (_userSubscriptions[0] && _userSubscriptions[0].stripeCustomerId) {
       // Trying to cancel a subscription
@@ -58,32 +55,6 @@ export async function GET(request: Request) {
       },
     });
     return NextResponse.json({ url: stripeSession.url });
-
-    // const stripeSession = await stripe.checkout.sessions.create({
-    //   payment_method_types: ["card"],
-    //   billing_address_collection: "auto",
-    //   customer_email: user?.emailAddresses?.[0]?.emailAddress,
-    //   mode: "payment",
-    //   line_items: [
-    //     {
-    //       price_data: {
-    //         currency: "USD",
-    //         product_data: {
-    //           name: "Premium Logo",
-    //           description: "High Quality Premium Logo",
-    //         },
-    //         unit_amount: 1000,
-    //       },
-    //       quantity: 1,
-    //     },
-    //   ],
-    //   metadata: {
-    //     userId: userId,
-    //   },
-    //   success_url: `${process.env.NEXT_BASE_URL}/`,
-    //   cancel_url: `${process.env.NEXT_BASE_URL}/`,
-    // });
-    // return NextResponse.json({ url: stripeSession.url });
   } catch (error) {
     console.log("$Stripe Error", error);
     return new NextResponse("Something went wrong", { status: 500 });

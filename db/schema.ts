@@ -34,9 +34,9 @@ export const logos = mysqlTable(
 export const users = mysqlTable(
   "users",
   {
-    id: int("id").autoincrement().notNull(),
-    name: varchar("name", { length: 255 }).notNull(),
-    email: varchar("email", { length: 255 }).notNull(),
+    id: varchar("id", { length: 255 }).notNull(),
+    name: varchar("name", { length: 255 }),
+    email: varchar("email", { length: 255 }),
     dateCreated: datetime("date_created", { mode: "string" }).default(sql`CURRENT_TIMESTAMP`),
     dailyLogoCount: tinyint("daily_logo_count").default(0),
   },
