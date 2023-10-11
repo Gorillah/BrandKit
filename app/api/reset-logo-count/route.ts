@@ -16,7 +16,7 @@ export default async function resetColumn(req: NextApiRequest, res: NextResponse
         dailyLogoCount: 0, // default to 0 every 24 hours
       })
       .execute();
-
+    console.log("column reset successfully");
     return NextResponse.json("Column reset successfully", { status: 200 });
   } catch (error) {
     return NextResponse.json("Error resetting how many logo was generated column", { status: 500 });
