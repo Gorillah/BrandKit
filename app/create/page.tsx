@@ -11,7 +11,6 @@ import { useFormPage, useProgressBar } from "@/store/createLogo";
 export default function CreatePage({}) {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const company = searchParams.get("company");
 
   const { page, setPage } = useFormPage();

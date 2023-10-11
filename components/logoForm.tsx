@@ -47,15 +47,6 @@ export default function FormCard() {
     clearCompany();
   }, []);
 
-  // const uploadToFirebase = useMutation({
-  //   mutationFn: async (id: string) => {
-  //     const response = await axios.post("/api/uploadToFirebase", {
-  //       id,
-  //     });
-  //     return response.data;
-  //   },
-  // });
-
   const uploadToCloudinary = useMutation({
     mutationFn: async (id: string) => {
       const response = await axios.post("/api/uploadToCloudinary", {
