@@ -1,12 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
@@ -61,29 +54,24 @@ export default function PriceTable() {
 
   return (
     <div id="price" className="flex flex-col gap-4">
+      <h2 className="text-3xl text-center font-semibold">Choose Your Plan</h2>
       <div className="flex justify-center gap-4 items-center">
-        <p className="text-2xl text-bold">Monthly</p>
+        <p className="text-xl text-bold">Monthly</p>
         <Switch checked={Yearly} onCheckedChange={() => setYearly(!Yearly)} />
-        <p className="text-2xl text-bold">Yearly</p>
+        <p className="text-xl text-bold">Yearly</p>
       </div>
       <div className="container grid grid-cols-1 md:grid-cols-3 gap-4 min-h-[500px] justify-center">
         {plans.map((plan, index) => (
           <Card
             key={index}
-            className={cn(
-              "flex flex-col justify-around shadow-md shadow-black/30",
-              plan.color,
-              plan.textColor
-            )}
+            className={cn("flex flex-col justify-around shadow-md shadow-black/30", plan.color, plan.textColor)}
           >
             <CardHeader>
               <CardTitle className="text-5xl text-slate-950">
                 {plan.price}
                 <span className="text-sm font-light">/ Monthly</span>
               </CardTitle>
-              <CardTitle className="text-4xl text-slate-950">
-                {plan.name}
-              </CardTitle>
+              <CardTitle className="text-4xl text-slate-950">{plan.name}</CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="flex flex-col gap-2 text-lg">
@@ -103,16 +91,4 @@ export default function PriceTable() {
 }
 
 {
-  /* <div key={index} className="bg-gray-200 flex flex-col gap-2 p-6 justify-between rounded-md">
-<p className="text-5xl">{plan.price}</p>
-<p className="text-4xl">{plan.name}</p>
-<p className="text-xl">{plan.description}</p>
-<hr/>
-<ul>
-  {plan.features.map((feature, index) => (
-    <li className="text-lg" key={index}>{feature}</li>
-  ))}
-</ul>
-<Button className="w-full">Start Free Trial</Button>
-</div> */
 }

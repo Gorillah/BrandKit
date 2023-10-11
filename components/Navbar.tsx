@@ -1,11 +1,4 @@
-import {
-  BadgeHelp,
-  CircleDollarSign,
-  HelpCircle,
-  LogIn,
-  Menu,
-  Shapes,
-} from "lucide-react";
+import { BadgeHelp, CircleDollarSign, HelpCircle, LogIn, Menu, Shapes } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
@@ -66,20 +59,12 @@ export default function Navbar() {
   const { userId } = auth();
   return (
     <div className="h-16 flex size-icon px-4 shadow-md bg-primary justify-between items-center">
-      <div
-        className={cn(
-          "md:hidden text-lg flex items-center",
-          userId ? "" : "order-2"
-        )}
-      >
+      <div className={cn("md:hidden text-lg flex items-center", userId ? "" : "order-2")}>
         <Sheet>
           <SheetTrigger>
             <Menu className="text-white" size={32} />
           </SheetTrigger>
-          <SheetContent
-            side={"left"}
-            className="flex flex-col gap-y-2 pt-20 text-lg"
-          >
+          <SheetContent side={"left"} className="flex flex-col gap-y-2 pt-20 text-lg">
             {routes.map((route, i) => (
               <SheetClose asChild key={i}>
                 <Link href={route.href}>
@@ -100,16 +85,11 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
       </div>
-      <Link
-        className="text-white relative w-36 h-full justify-start"
-        href={"/"}
-      >
+      <Link className="text-white relative w-36 h-full justify-start" href={"/"}>
         <Image
           src="/brandkit_01.webp"
-          className={cn(
-            "flex justify-center items-center",
-            userId && "order-1"
-          )}
+          className={cn("flex justify-center items-center", userId && "order-1")}
+          rel="preload"
           alt="BrandKit Logo"
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"

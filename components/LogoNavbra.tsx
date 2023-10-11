@@ -23,11 +23,13 @@ import useDownloader from "react-use-downloader";
 import axios from "axios";
 
 type logo = {
-  logoId: string;
+  id: number;
+  userId: string;
   companyName: string;
+  dateGenerated: string | null;
   logoUrl: string;
-  logoPublicId: string;
-  logoFormat: string;
+  logoPublicId: string | null;
+  logoFormat: string | null;
 };
 
 type Subscription = {
@@ -35,12 +37,12 @@ type Subscription = {
 };
 
 export default function LogoNavbar({
-  logoFormat,
-  companyName,
-  logoUrl,
-  logoPublicId,
   isSub,
-}: logo & Subscription) {
+  logoUrl,
+  companyName,
+  logoPublicId,
+  logoFormat,
+}: logo & Subscription): JSX.Element {
   const { download } = useDownloader();
   const router = useRouter();
   let url = logoUrl;
@@ -66,8 +68,7 @@ export default function LogoNavbar({
         const res = await axios.get("/api/stripe");
         window.location.href = res.data.url;
       } else {
-        console.log("downloading");
-        return () => download(logoUrl, companyName + "." + logoFormat);
+        return download(logoUrl, companyName + "." + logoFormat);
       }
       setIsLoading(false);
     } catch (error) {
@@ -80,18 +81,6 @@ export default function LogoNavbar({
   const [quality, setQuality] = useState([525]); // Keep as an array
   const [watermark, setWatermark] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (loading) {
-      const interval = setInterval(() => {
-        if (logoUrl.includes("http://res.cloudinary.com")) {
-          setLoading(false);
-        } else {
-          router.refresh();
-        }
-      }, 1500);
-    }
-  }, [loading, logoUrl]);
 
   return (
     <>
@@ -118,11 +107,7 @@ export default function LogoNavbar({
                 <Label htmlFor="quality">Quality</Label>
                 <QualitySlider quality={quality} setQuality={setQuality} />
                 <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="watermark"
-                    onCheckedChange={() => setWatermark(!watermark)}
-                    checked={watermark}
-                  />
+                  <Checkbox id="watermark" onCheckedChange={() => setWatermark(!watermark)} checked={watermark} />
                   <Label htmlFor="watermark">Remove Watermark</Label>
                 </div>
                 <div className="flex items-center space-x-2">

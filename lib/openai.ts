@@ -23,7 +23,7 @@ export async function generateLogoPrompt(dataFrom: formData) {
           `,
         },
       ],
-      max_tokens: 700,
+      max_tokens: 400,
     });
     const data = await response.json();
     const logo_description = data.choices[0].message.content;

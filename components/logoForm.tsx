@@ -84,8 +84,13 @@ export default function FormCard() {
         uploadToCloudinary.mutate(id);
         router.push(`/logo/${id}`);
       },
-      onError: (error) => {
-        window.alert(error);
+      onError: (error: any) => {
+        toast({
+          title: "Failed to create logo",
+          description: error.message,
+          duration: 3000,
+        });
+        console.log(error);
       },
     });
   };
@@ -122,7 +127,7 @@ export default function FormCard() {
               variant={"default"}
               className={cn(
                 "h-14 text-lg w-40 lg:w-[500px] shadow-gray-400 shadow-xl",
-                createLogo.isLoading && "hidden",
+                createLogo.isLoading && "hidden"
               )}
               onClick={() => {
                 if (page === 2 && fontStyle.length === 0) {

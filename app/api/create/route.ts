@@ -39,10 +39,7 @@ export async function POST(request: NextRequest) {
   // Generate logo description
   const logo_description = await generateLogoPrompt(formData);
   if (!logo_description) {
-    return NextResponse.json(
-      { error: "failed to generate logo description" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "failed to generate logo description" }, { status: 500 });
   }
 
   console.log(logo_description);
@@ -51,10 +48,7 @@ export async function POST(request: NextRequest) {
   const logo_url = await generateLogo(logo_description);
 
   if (!logo_url) {
-    return NextResponse.json(
-      { error: "failed to generate logo" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "failed to generate logo" }, { status: 500 });
   }
 
   const logo = await db.insert(logos).values({
