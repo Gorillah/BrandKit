@@ -17,10 +17,18 @@ import axios from "axios";
 export default function PriceTable() {
   const [Yearly, setYearly] = useState(true);
 
+  const subscriptionPlan = {
+    free: "free",
+    pro: "pro",
+    business: "business",
+  };
+
   const plans = [
     {
       name: "Starter",
+      subscriptionPlan: subscriptionPlan.free,
       price: Yearly ? "Free" : "Free",
+      credits: 2,
       description: "1 Logo, 1 Social Media Post",
       color: "bg-gray-200",
       textColor: "text-black",
@@ -31,10 +39,14 @@ export default function PriceTable() {
         "No customization options",
         "Watermarked",
       ],
+      Button: "Create Account",
+      url: "/sign-up",
     },
     {
       name: "Pro",
+      subscriptionPlan: subscriptionPlan.pro,
       price: Yearly ? "$9" : "$15",
+      credits: 15,
       description: "1 Logo, 1 Social Media Post",
       color: "bg-gray-200",
       textColor: "text-black",
@@ -44,10 +56,14 @@ export default function PriceTable() {
         "Commercial use license",
         "Advanced customization options",
       ],
+      Button: "Start Free Trial",
+      url: "/api/stripe",
     },
     {
-      name: "Premium",
+      name: "Business",
+      subscriptionPlan: subscriptionPlan.business,
       price: Yearly ? "$15" : "$25",
+      credits: 30,
       color: "bg-gray-200",
       textColor: "text-black",
       description: "1 Logo, 1 Social Media Post",
@@ -60,11 +76,19 @@ export default function PriceTable() {
         "Priority support",
         "Premium design templates",
       ],
+      Button: "Start Free Trial",
+      url: "/api/stripe",
     },
   ];
 
-  const handleSubsciption = async () => {
-    const res = await axios.post("/api/stripe/pro", {
+  const handleSubsciption = async (
+    subscriptionPlan: string,
+    url: string,
+    credits: number
+  ) => {
+    const res = await axios.post(url, {
+      subscriptionPlan,
+      credits,
       interval: Yearly ? "year" : "month",
     });
     window.location.href = res.data.url;
@@ -105,8 +129,17 @@ export default function PriceTable() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button className="w-full" onClick={handleSubsciption}>
-                Start Free Trial
+              <Button
+                className="w-full"
+                onClick={() =>
+                  handleSubsciption(
+                    plan.subscriptionPlan,
+                    plan.url,
+                    plan.credits
+                  )
+                }
+              >
+                {plan.Button}
               </Button>
             </CardFooter>
           </Card>

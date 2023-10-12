@@ -1,25 +1,35 @@
 "use client";
 
-import React, { PureComponent } from "react";
-import Image from "next/image";
+import React from "react";
 import { redirect } from "next/navigation";
 import { AspectRatio } from "./ui/aspect-ratio";
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
 
-type Props = {
-  logoUrl: string;
+type props = {
   id: number;
+  companyName: string;
+  dateGenerated: string | null;
+  logoUrl: string;
+  userId: string;
+  logoPublicId: string | null;
+  logoFormat: string | null;
 };
 
-const Logos = ({ logoUrl, id }: Props) => {
+type isSub = {
+  isSub: boolean;
+};
+
+const Logos = ({ logoUrl, id, isSub }: props & isSub) => {
   const handleClick = () => {
     redirect(`/logo/${id}`);
   };
+  console.log(isSub);
   return (
     <div>
       <Link href={`/logo/${id}`} key={id}>
         <AspectRatio ratio={1 / 1}>
-          <Image
+          <CldImage
             src={logoUrl || ""}
             onClick={() => handleClick}
             className="col-span-2 row-start-2"
@@ -27,6 +37,27 @@ const Logos = ({ logoUrl, id }: Props) => {
             alt=""
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 500px) 50vw, 33vw"
+            overlays={
+              isSub
+                ? []
+                : [
+                    {
+                      position: {
+                        gravity: "center",
+                        angle: -20,
+                      },
+                      text: {
+                        color: "rgb:52a4ff80",
+                        fontFamily: "Source Sans Pro",
+                        fontSize: 50,
+                        fontWeight: "black",
+                        text: "BrandKit",
+                        stroke: true,
+                        border: "1px_solid_rgb:2d0eff99",
+                      },
+                    },
+                  ]
+            }
           />
         </AspectRatio>
       </Link>

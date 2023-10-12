@@ -9,7 +9,7 @@ const return_url = process.env.NEXT_BASE_URL + "/";
 
 export async function POST(request: Request) {
   try {
-    const { interval } = await request.json();
+    const { interval, subscriptionPlan, credits } = await request.json();
     const { userId } = await auth();
     const user = await currentUser();
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });
@@ -40,12 +40,12 @@ export async function POST(request: Request) {
           price_data: {
             currency: "USD",
             product_data: {
-              name: "BrandKit Premium",
+              name: "BrandKit " + subscriptionPlan,
               description: "Unlimited and high quality logo access",
             },
-            unit_amount: 1000,
+            unit_amount: getPrice(subscriptionPlan, interval),
             recurring: {
-              interval: "month",
+              interval,
             },
           },
           quantity: 1,
@@ -56,11 +56,43 @@ export async function POST(request: Request) {
       },
       metadata: {
         userId: userId,
+        subscriptionPlan,
+        credits,
       },
     });
     return NextResponse.json({ url: stripeSession.url });
   } catch (error) {
     console.log("$Stripe Error", error);
     return new NextResponse("Something went wrong", { status: 500 });
+  }
+}
+
+const subscriptionPlan = {
+  free: "free",
+  pro: "pro",
+  business: "business",
+};
+
+// Interval options
+const intervals = {
+  monthly: "month",
+  yearly: "year",
+};
+
+function getPrice(plan: string, interval: string) {
+  if (plan === subscriptionPlan.pro && interval === intervals.monthly) {
+    return 1500;
+  } else if (plan === subscriptionPlan.pro && interval === intervals.yearly) {
+    return 9600;
+  } else if (
+    plan === subscriptionPlan.business &&
+    interval === intervals.monthly
+  ) {
+    return 2500;
+  } else if (
+    plan === subscriptionPlan.business &&
+    interval === intervals.yearly
+  ) {
+    return 18000;
   }
 }

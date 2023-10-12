@@ -1,19 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import Lottie from "react-lottie-player";
 import React from "react";
-import lottieJson from "@/public/animation.json";
 import { CldImage } from "next-cloudinary";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { db } from "@/lib/db";
-import { logos } from "@/drizzle/schema";
-import { and, eq } from "drizzle-orm";
-import { toast } from "./ui/use-toast";
 
 type logo = {
   id: number;
@@ -29,7 +21,13 @@ type Subscription = {
   isSub: boolean;
 };
 
-const Logo = ({ id, logoUrl, companyName, logoPublicId, logoFormat }: logo & Subscription) => {
+const Logo = ({
+  id,
+  logoUrl,
+  companyName,
+  logoPublicId,
+  logoFormat,
+}: logo & Subscription) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -51,7 +49,8 @@ const Logo = ({ id, logoUrl, companyName, logoPublicId, logoFormat }: logo & Sub
       onMutate: () => {
         console.log(logoPublicId);
       },
-      retry: (failureCount, error) => failureCount < 5 && (!logoPublicId || logoPublicId === ""),
+      retry: (failureCount, error) =>
+        failureCount < 5 && (!logoPublicId || logoPublicId === ""),
     }
   );
 
@@ -74,13 +73,16 @@ const Logo = ({ id, logoUrl, companyName, logoPublicId, logoFormat }: logo & Sub
             {
               position: {
                 gravity: "center",
+                angle: -20,
               },
               text: {
-                color: "black",
+                color: "rgb:52a4ff80",
                 fontFamily: "Source Sans Pro",
                 fontSize: 50,
                 fontWeight: "black",
-                text: "IS LIFE",
+                text: "BrandKit",
+                stroke: true,
+                border: "1px_solid_rgb:2d0eff99",
               },
             },
           ]}

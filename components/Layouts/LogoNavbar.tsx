@@ -44,21 +44,6 @@ export default function LogoNavbar({
   logoFormat,
 }: logo & Subscription): JSX.Element {
   const { download } = useDownloader();
-  const router = useRouter();
-  let url = logoUrl;
-  let id = "";
-  if (logoUrl.length === 0) router.push("/");
-  if (url.includes("http://res.cloudinary.com")) {
-    const regex = /\/logos\/(.*)/;
-    const match = url.match(regex);
-    if (match) {
-      const s1 = match[0].split(".png")[0];
-      id = s1.substring(1);
-    } else {
-      console.warn("No match found for the given URL.");
-    }
-  }
-
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePayment = async () => {
@@ -79,8 +64,7 @@ export default function LogoNavbar({
     }
   };
   const [quality, setQuality] = useState([525]); // Keep as an array
-  const [watermark, setWatermark] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   return (
     <>
@@ -102,14 +86,10 @@ export default function LogoNavbar({
           </SheetTrigger>
           <SheetContent side={"bottom"}>
             <div className="flex flex-col mb-10">
-              <SheetHeader className="flex flex-col gap-4">
+              <SheetHeader className="flex flex-col gap-4 container">
                 <SheetTitle>Download</SheetTitle>
                 <Label htmlFor="quality">Quality</Label>
                 <QualitySlider quality={quality} setQuality={setQuality} />
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="watermark" onCheckedChange={() => setWatermark(!watermark)} checked={watermark} />
-                  <Label htmlFor="watermark">Remove Watermark</Label>
-                </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox id="terms" />
                   <Label htmlFor="terms">Accept terms and conditions</Label>

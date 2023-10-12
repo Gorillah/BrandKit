@@ -26,7 +26,10 @@ const handler = async (req: Request) => {
   let evt: Event | null = null;
 
   try {
-    evt = wh.verify(JSON.stringify(payload), heads as IncomingHttpHeaders & WebhookRequiredHeaders) as Event;
+    evt = wh.verify(
+      JSON.stringify(payload),
+      heads as IncomingHttpHeaders & WebhookRequiredHeaders
+    ) as Event;
   } catch (error) {
     console.error((error as Error).message);
     return new NextResponse("Something went wrong", { status: 500 });
@@ -36,10 +39,8 @@ const handler = async (req: Request) => {
 
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, email_addresses, ...attributes } = evt.data;
-    console.log(id);
-    console.log(attributes);
-
-    // if (!id) return new NextResponse("Id does not exist", { status: 400 });
+    // console.log(id);
+    // console.log(attributes);
 
     const email = email_addresses[0].email_address;
 
@@ -47,7 +48,7 @@ const handler = async (req: Request) => {
       id,
       name: `${attributes.first_name} ${attributes.last_name}`,
       email,
-      dailyLogoCount: 0,
+      credit: 2,
     });
   }
 };
