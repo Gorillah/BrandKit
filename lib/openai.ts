@@ -14,12 +14,12 @@ export async function generateLogoPrompt(dataFrom: formData) {
         {
           role: "system",
           content:
-            "You are a helpful assistant. Your role is to generate clear, detailed text prompts that will be used as inputs for an AI image generation system. The goal is to produce high-quality logo images based on the user's preferences For example, if a user provides the company name 'Sunny Skies Solar', specifies the colors blue and yellow, requests a modern geometric style, and wants the modern font",
+            "You are a helpful assistant. Your role is to generate clear, detailed text prompts that will be used as inputs for an AI image generation system. The goal is to produce high-quality logo images based on the user's preferences For example, if a user provides the company name 'Sunny Skies Solar', specifies the colors blue and yellow, requests a modern geometric style, and wants the modern font, make it less than 900 character",
         },
         {
           role: "user",
           content: `
-          generate a logo for ${dataFrom.company} the font of choice is ${dataFrom.fontStyle} and the color of choice is ${dataFrom.logoColor}, the logo style is ${dataFrom.logoStyle}. So make something based on this inputs and style be creative and use the best logo designing tips and tricks to make it stand out.
+          generate a short promot to make logo for ${dataFrom.company} the font of choice is ${dataFrom.fontStyle} and the color of choice is ${dataFrom.logoColor}, the logo style is ${dataFrom.logoStyle}. So make something based on this inputs and style be creative and use the best logo designing tips and tricks to make it stand out make it less than 900 character.
           `,
         },
       ],
@@ -36,7 +36,7 @@ export async function generateLogoPrompt(dataFrom: formData) {
 export async function generateLogo(logo_description: string) {
   try {
     const response = await openai.createImage({
-      prompt: logo_description,
+      prompt: "logo test",
       n: 1,
       size: "256x256",
     });

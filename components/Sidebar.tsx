@@ -6,7 +6,7 @@ import { Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { LayoutDashboard } from "lucide-react";
 import { Button } from "./ui/button";
-import HeaderMenu from "@/components/HeaderMenu";
+import HeaderMenu from "@/components/Layouts/HeaderMenu";
 
 export default function Navbar() {
   return (

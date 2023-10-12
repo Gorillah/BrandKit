@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Provider>
           <body className={cn(font.className)}>
             {children}
-            <ReactQueryDevtools />
+            {/* <ReactQueryDevtools /> */}
             <Toaster />
           </body>
         </Provider>

@@ -13,7 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import HeaderMenu from "@/components/HeaderMenu";
+import HeaderMenu from "@/components/Layouts/HeaderMenu";
 import { cn } from "@/lib/utils";
 
 const routes = [

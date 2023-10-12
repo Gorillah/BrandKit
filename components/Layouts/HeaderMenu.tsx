@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -35,9 +35,7 @@ const HeaderMenu = () => {
         <Link
           key={route.href}
           href={route.href}
-          className={cn(
-            userId === null && route.authReq == true ? "hidden" : "",
-          )}
+          className={cn(userId === null && route.authReq == true ? "hidden" : "")}
         >
           <Button className="text-white text-lg" variant={"link"}>
             {route.label}

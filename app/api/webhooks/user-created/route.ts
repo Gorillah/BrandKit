@@ -1,4 +1,4 @@
-import { users } from "@/db/schema";
+import { users } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import type { WebhookEvent } from "@clerk/clerk-sdk-node";
 import { NextApiRequest } from "next";

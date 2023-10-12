@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import Logo from "@/components/Logo";
 import { Metadata } from "next";
 import { checkSubscription } from "@/lib/subscription";
-import LogoNavbar from "@/components/LogoNavbra";
+import LogoNavbar from "@/components/Layouts/LogoNavbar";
 import { useQuery } from "@tanstack/react-query";
 
 export const metadata: Metadata = {

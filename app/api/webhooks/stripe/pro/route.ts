@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { userSubscriptions } from "@/db/schema";
+import { userSubscriptions } from "@/drizzle/schema";
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -12,11 +12,7 @@ export async function POST(req: Request) {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SIGNING_SECRET as string,
-    );
+    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SIGNING_SECRET as string);
   } catch (error) {
     return new NextResponse("webhook error", {
       status: 400,
@@ -26,11 +22,8 @@ export async function POST(req: Request) {
   const session = event.data.object as Stripe.Checkout.Session;
 
   if (event.type === "checkout.session.completed") {
-    const subscription = await stripe.subscriptions.retrieve(
-      session.subscription as string,
-    );
-    if (!session?.metadata?.userId!)
-      return new NextResponse("Metadata userId is Not found", { status: 404 });
+    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+    if (!session?.metadata?.userId!) return new NextResponse("Metadata userId is Not found", { status: 404 });
     await db.insert(userSubscriptions).values({
       userId: session.metadata.userId,
       stripeSubscriptionId: subscription.id,
@@ -41,16 +34,12 @@ export async function POST(req: Request) {
   }
 
   if (event.type === "invoice.payment_succeeded") {
-    const subscription = await stripe.subscriptions.retrieve(
-      session.subscription as string,
-    );
+    const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
     await db
       .update(userSubscriptions)
       .set({
         stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(
-          subscription.current_period_end * 1000,
-        ),
+        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
       })
       .where(eq(userSubscriptions.userId, session?.metadata?.userId!));
   }

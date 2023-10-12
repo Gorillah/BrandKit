@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import TypewriterTitle from "./TypewriterTitle";
+import TypewriterTitle from "../TypewriterTitle";
 import { useForm } from "react-hook-form";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { companyFormSchema } from "@/app/(landing)/constants";
+import { companyFormSchema } from "@/app/(homepage)/constants";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 

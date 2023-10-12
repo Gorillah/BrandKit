@@ -1,5 +1,5 @@
 import { db } from "@/lib/db"; // Your Drizzle ORM setup
-import { users } from "@/db/schema"; // Your table schema
+import { users } from "@/drizzle/schema"; // Your table schema
 import { NextRequest, NextResponse } from "next/server";
 import { NextApiRequest } from "next";
 

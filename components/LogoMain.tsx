@@ -7,7 +7,7 @@
 // import { auth } from "@clerk/nextjs";
 // import { redirect } from "next/navigation";
 // import { db } from "@/lib/db";
-// import { logos } from "@/db/schema";
+// import { logos } from "@/drizzle/schema";
 // import { eq, and } from "drizzle-orm";
 
 // type logo = {
@@ -51,7 +51,7 @@
 //   });
 //   return (
 //     <div>
-   
+
 //     </div>
 //   );
 // }

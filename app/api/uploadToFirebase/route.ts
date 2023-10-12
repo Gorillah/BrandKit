@@ -1,4 +1,4 @@
-import { logos } from "@/db/schema";
+import { logos } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { uploadFileToFirebase } from "@/lib/firebase";
 import { eq } from "drizzle-orm";
@@ -11,12 +11,8 @@ export async function POST(req: Request) {
       .select()
       .from(logos)
       .where(eq(logos.id, parseInt(id)));
-    if (!logo[0].logoUrl)
-      return NextResponse.json("Not found", { status: 404 });
-    const firebase_url = await uploadFileToFirebase(
-      logo[0].logoUrl,
-      logo[0].companyName,
-    );
+    if (!logo[0].logoUrl) return NextResponse.json("Not found", { status: 404 });
+    const firebase_url = await uploadFileToFirebase(logo[0].logoUrl, logo[0].companyName);
     await db
       .update(logos)
       .set({

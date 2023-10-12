@@ -17,11 +17,10 @@ import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Lottie from "react-lottie-player";
-import lottieJson from "@/public/animation_lngjrw7e.json";
-import { create } from "domain";
+import lottieJson from "@/public/animation.json";
 
 export default function FormCard() {
-  const router = useRouter()
+  const router = useRouter();
 
   const { progress, setProgress } = useProgressBar();
   const { page, setPage } = useFormPage();

@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Lottie from "react-lottie-player";
 import React from "react";
-import lottieJson from "@/public/animation_lngjrw7e.json";
+import lottieJson from "@/public/animation.json";
 import { CldImage } from "next-cloudinary";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { db } from "@/lib/db";
-import { logos } from "@/db/schema";
+import { logos } from "@/drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { toast } from "./ui/use-toast";
 

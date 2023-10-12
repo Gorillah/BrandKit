@@ -1,4 +1,4 @@
-import { logos } from "@/db/schema";
+import { logos } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
@@ -11,18 +11,15 @@ export async function POST(req: Request) {
       .select()
       .from(logos)
       .where(eq(logos.id, parseInt(id)));
-    if (!logo[0].logoUrl)
-      return NextResponse.json("Not found", { status: 404 });
+    if (!logo[0].logoUrl) return NextResponse.json("Not found", { status: 404 });
 
     const formData = new FormData();
     formData.append("file", logo[0].logoUrl);
     formData.append("upload_preset", "BrandKit");
 
-    const res = await axios.post(
-      "https://api.cloudinary.com/v1_1/dkarnkl8i/image/upload",
-      formData,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
+    const res = await axios.post("https://api.cloudinary.com/v1_1/dkarnkl8i/image/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
     console.warn(res.data);
 

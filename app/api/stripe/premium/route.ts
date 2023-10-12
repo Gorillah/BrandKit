@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { userSubscriptions } from "@/db/schema";
+import { userSubscriptions } from "@/drizzle/schema";
 import { stripe } from "@/lib/stripe";
 import { auth, currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
@@ -7,13 +7,17 @@ import { eq } from "drizzle-orm";
 
 const return_url = process.env.NEXT_BASE_URL + "/";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
+    const { interval } = await request.json();
     const { userId } = await auth();
     const user = await currentUser();
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });
 
-    const _userSubscriptions = await db.select().from(userSubscriptions).where(eq(userSubscriptions.userId, userId));
+    const _userSubscriptions = await db
+      .select()
+      .from(userSubscriptions)
+      .where(eq(userSubscriptions.userId, userId));
 
     if (_userSubscriptions[0] && _userSubscriptions[0].stripeCustomerId) {
       // Trying to cancel a subscription

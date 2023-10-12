@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 
 export default {
-  schema: "./db/schema.ts",
+  schema: "./drizzle/schema.ts",
   out: "./drizzle",
   driver: "mysql2",
   dbCredentials: {
