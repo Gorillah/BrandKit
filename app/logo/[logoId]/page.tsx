@@ -35,7 +35,6 @@ const LogoPage = async ({ params: { logoId } }: Props) => {
         eq(logos.userId, userId) // Created by current user
       )
     );
-  console.log("logoSelect", logoSelect);
 
   return (
     <div className="min-h-screen">

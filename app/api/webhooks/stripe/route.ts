@@ -24,6 +24,8 @@ export async function POST(req: Request) {
   }
 
   const session = event.data.object as Stripe.Checkout.Session;
+  if (!session?.metadata)
+    return new NextResponse("Metadata is Not found", { status: 404 });
 
   if (event.type === "checkout.session.completed") {
     const subscription = await stripe.subscriptions.retrieve(
@@ -52,7 +54,7 @@ export async function POST(req: Request) {
       session.subscription as string
     );
     await db
-      .update(userSubscriptions)
+      .update(userSubscriptions!)
       .set({
         stripePriceId: subscription.items.data[0].price.id,
         stripeCurrentPeriodEnd: new Date(
@@ -61,6 +63,29 @@ export async function POST(req: Request) {
       })
       .where(eq(userSubscriptions.userId, session?.metadata?.userId!));
   }
+
+  if (event.type === "customer.subscription.updated") {
+    // const sub = await db
+    //   .update(userSubscriptions)
+    //   .set({
+    //     plan: "active",
+    //     stripePriceId: session.plan.id,
+    //     stripeCurrentPeriodEnd: session.current_period_end,
+    //   })
+    //   .where(eq(userSubscriptions.stripeSubscriptionId, session.id));
+    // console.log(session);
+  }
+
+  if (event.type === "customer.subscription.deleted") {
+    const subscription = await stripe.subscriptions.retrieve(
+      session.subscription as string
+    );
+    console.log(session);
+    await db
+      .delete(userSubscriptions)
+      .where(eq(userSubscriptions.stripeSubscriptionId, subscription.id));
+  }
+
   return new NextResponse(null, {
     status: 200,
   });

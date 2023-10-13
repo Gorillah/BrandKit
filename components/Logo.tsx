@@ -27,6 +27,7 @@ const Logo = ({
   companyName,
   logoPublicId,
   logoFormat,
+  isSub
 }: logo & Subscription) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -69,23 +70,27 @@ const Logo = ({
           height={500}
           src={logoPublicId!}
           alt={companyName}
-          overlays={[
-            {
-              position: {
-                gravity: "center",
-                angle: -20,
-              },
-              text: {
-                color: "rgb:52a4ff80",
-                fontFamily: "Source Sans Pro",
-                fontSize: 50,
-                fontWeight: "black",
-                text: "BrandKit",
-                stroke: true,
-                border: "1px_solid_rgb:2d0eff99",
-              },
-            },
-          ]}
+          overlays={
+            isSub
+              ? []
+              : [
+                  {
+                    position: {
+                      gravity: "center",
+                      angle: -20,
+                    },
+                    text: {
+                      color: "rgb:52a4ff80",
+                      fontFamily: "Source Sans Pro",
+                      fontSize: 50,
+                      fontWeight: "black",
+                      text: "BrandKit",
+                      stroke: true,
+                      border: "1px_solid_rgb:2d0eff99",
+                    },
+                  },
+                ]
+          }
           priority
         />
       )}

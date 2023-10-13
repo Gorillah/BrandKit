@@ -1,16 +1,9 @@
 import { users } from "@/drizzle/schema";
 import { db } from "@/lib/db";
-import type { WebhookEvent } from "@clerk/clerk-sdk-node";
-import { NextApiRequest } from "next";
-import { NextRequest } from "next/server";
 import { headers } from "next/headers";
 import { Webhook, WebhookRequiredHeaders } from "svix";
-import { EventEmitter } from "stream";
 import { IncomingHttpHeaders } from "http";
 import { NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
-import { auth } from "@clerk/nextjs";
-
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET || "";
 
 const handler = async (req: Request) => {

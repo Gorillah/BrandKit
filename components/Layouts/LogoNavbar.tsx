@@ -16,7 +16,7 @@ import { Button } from "../ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import QualitySlider from "@/components/QualitySlider";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useDownloader from "react-use-downloader";

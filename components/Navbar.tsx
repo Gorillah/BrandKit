@@ -1,4 +1,12 @@
-import { BadgeHelp, CircleDollarSign, HelpCircle, LogIn, Menu, Shapes } from "lucide-react";
+import {
+  BadgeHelp,
+  CircleDollarSign,
+  Crown,
+  HelpCircle,
+  LogIn,
+  Menu,
+  Shapes,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
@@ -15,6 +23,7 @@ import {
 } from "@/components/ui/sheet";
 import HeaderMenu from "@/components/Layouts/HeaderMenu";
 import { cn } from "@/lib/utils";
+import { checkSubscription } from "@/lib/subscription";
 
 const routes = [
   {
@@ -55,16 +64,26 @@ const routes = [
   },
 ];
 
-export default function Navbar() {
+export default async function Navbar() {
   const { userId } = auth();
+  const isSubscribed = await checkSubscription();
+  console.log("isSubscribed", isSubscribed);
   return (
     <div className="h-16 flex size-icon px-4 shadow-md bg-primary justify-between items-center">
-      <div className={cn("md:hidden text-lg flex items-center", userId ? "" : "order-2")}>
+      <div
+        className={cn(
+          "md:hidden text-lg flex items-center",
+          userId ? "" : "order-2"
+        )}
+      >
         <Sheet>
           <SheetTrigger>
             <Menu className="text-white" size={32} />
           </SheetTrigger>
-          <SheetContent side={"left"} className="flex flex-col gap-y-2 pt-20 text-lg">
+          <SheetContent
+            side={"left"}
+            className="flex flex-col gap-y-2 pt-20 text-lg"
+          >
             {routes.map((route, i) => (
               <SheetClose asChild key={i}>
                 <Link href={route.href}>
@@ -85,10 +104,16 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
       </div>
-      <Link className="text-white relative w-36 h-full justify-start" href={"/"}>
+      <Link
+        className="text-white relative w-36 h-full justify-start"
+        href={"/"}
+      >
         <Image
           src="/brandkit_01.webp"
-          className={cn("flex justify-center items-center", userId && "order-1")}
+          className={cn(
+            "flex justify-center items-center",
+            userId && "order-1"
+          )}
           rel="preload"
           alt="BrandKit Logo"
           fill
@@ -108,11 +133,25 @@ export default function Navbar() {
             </Link>
           </div>
         ) : (
-          <UserButton afterSignOutUrl="/" />
+          <div className="relative">
+            <UserButton afterSignOutUrl="/" />
+            {isSubscribed && (
+              <Crown
+                color="blue"
+                className="absolute h-5 w-5 rounded-full bg-white border-2 top-[-10px] right-[-5px]"
+              />
+            )}
+          </div>
         )}
       </div>
-      <div className={cn(userId ? "flex" : "hidden", "md:hidden")}>
+      <div className={cn(userId ? "flex" : "hidden", "md:hidden relative")}>
         <UserButton afterSignOutUrl="/" />
+        {isSubscribed && (
+          <Crown
+            color="blue"
+            className="absolute h-5 w-5 rounded-full bg-white border-2 top-[-10px] right-[-5px]"
+          />
+        )}
       </div>
     </div>
   );
