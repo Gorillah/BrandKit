@@ -1,11 +1,15 @@
 import {
   BadgeHelp,
+  ChevronRightCircle,
   CircleDollarSign,
   Crown,
   HelpCircle,
+  KanbanSquare,
   LogIn,
   Menu,
   Shapes,
+  UserCircle2,
+  UserPlus2,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -29,19 +33,25 @@ const routes = [
   {
     label: "Login",
     href: "/sign-in",
-    img: LogIn,
+    img: UserCircle2,
     authReq: false,
   },
   {
     label: "Register",
     href: "/sign-up",
-    img: LogIn,
+    img: UserCircle2,
     authReq: false,
   },
   {
     label: "My Logos",
     href: "/logo",
     img: Shapes,
+    authReq: true,
+  },
+  {
+    label: "My Subscriptions",
+    href: "/api/stripe",
+    img: KanbanSquare,
     authReq: true,
   },
   {
@@ -85,16 +95,18 @@ export default async function Navbar() {
             className="flex flex-col gap-y-2 pt-20 text-lg"
           >
             {routes.map((route, i) => (
-              <SheetClose asChild key={i}>
+              <SheetClose
+                asChild
+                key={i}
+                className={cn(
+                  "hover:bg-gray-200 py-2 pl-1 rounded-md font-semibold border-b-2",
+                  userId && route.label === "Login" ? "hidden" : "",
+                  userId && route.label === "Register" ? "hidden" : "",
+                  !userId && route.authReq ? "hidden" : ""
+                )}
+              >
                 <Link href={route.href}>
-                  <div
-                    className={cn(
-                      "flex items-center gap-2 hover:bg-gray-200 py-2 pl-1 rounded-md font-semibold",
-                      userId && route.label === "Login" ? "hidden" : "",
-                      userId && route.label === "Register" ? "hidden" : "",
-                      !userId && route.authReq ? "hidden" : ""
-                    )}
-                  >
+                  <div className="flex items-center gap-2">
                     <route.img />
                     <div>{route.label}</div>
                   </div>
