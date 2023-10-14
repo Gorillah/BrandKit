@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { Webhook, WebhookRequiredHeaders } from "svix";
 import { IncomingHttpHeaders } from "http";
 import { NextResponse } from "next/server";
+import { eq, sql } from "drizzle-orm";
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET || "";
 
 const handler = async (req: Request) => {
@@ -30,7 +31,7 @@ const handler = async (req: Request) => {
 
   const eventType: EventType = evt.type;
 
-  if (eventType === "user.created" || eventType === "user.updated") {
+  if (eventType === "user.created") {
     const { id, email_addresses, ...attributes } = evt.data;
     // console.log(id);
     // console.log(attributes);
@@ -44,9 +45,14 @@ const handler = async (req: Request) => {
       credit: 2,
     });
   }
+  if (eventType === "user.deleted") {
+    const { id, email_addresses, ...attributes } = evt.data;
+    const user = await db.select().from(users).where(eq(users.id, id));
+  }
+  return NextResponse.json("Success", { status: 200 });
 };
 
-type EventType = "user.created" | "user.updated";
+type EventType = "user.created" | "user.updated" | "user.deleted";
 
 type Event = {
   data: Record<string, string | number>;

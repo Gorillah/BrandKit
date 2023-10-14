@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import axios from "axios";
+import UseCredit from "@/lib/useCredit";
 
 export async function POST(req: Request) {
   try {
@@ -31,6 +32,7 @@ export async function POST(req: Request) {
         logoFormat: res.data.format,
       })
       .where(eq(logos.id, parseInt(id)));
+      UseCredit();
     return NextResponse.json(true, { status: 200 });
   } catch (error) {
     return NextResponse.json(error, { status: 500 });

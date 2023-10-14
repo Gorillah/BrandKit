@@ -8,6 +8,9 @@ const config = {
 };
 
 export default withPlaiceholder({
+  experimental: {
+    serverActions: true,
+  },
   images: {
     domains: [
       "oaidalleapiprodscus.blob.core.windows.net",

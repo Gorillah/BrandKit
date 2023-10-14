@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     }
 
     const stripeSession = await stripe.checkout.sessions.create({
-      success_url: return_url,
+      success_url: return_url + "/success",
       cancel_url: return_url,
       payment_method_types: ["card"],
       mode: "subscription",

@@ -38,7 +38,7 @@ export async function generateLogo(logo_description: string) {
     const response = await openai.createImage({
       prompt: "logo test",
       n: 1,
-      size: "256x256",
+      size: "1024x1024",
     });
     const data = await response.json();
     console.log(data);

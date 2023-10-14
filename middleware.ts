@@ -9,7 +9,7 @@ export default authMiddleware({
     "/sign-in",
     "/sign-up",
     "/api/webhooks/stripe",
-    "/api/webhooks/user-created",
+    "/api/webhooks/create-user-db",
     "/api/webhooks/reset-credits",
   ],
 });

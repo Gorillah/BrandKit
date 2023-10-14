@@ -45,7 +45,7 @@ export default function PriceTable() {
     {
       name: "Pro",
       subscriptionPlan: subscriptionPlan.pro,
-      price: Yearly ? "$9" : "$15",
+      price: Yearly ? "$8" : "$12",
       credits: 15,
       description: "1 Logo, 1 Social Media Post",
       color: "bg-gray-200",
@@ -62,13 +62,13 @@ export default function PriceTable() {
     {
       name: "Business",
       subscriptionPlan: subscriptionPlan.business,
-      price: Yearly ? "$15" : "$25",
-      credits: 30,
+      price: Yearly ? "$15" : "$20",
+      credits: 35,
       color: "bg-gray-200",
       textColor: "text-black",
       description: "1 Logo, 1 Social Media Post",
       features: [
-        "30 Credits",
+        "35 Credits",
         "Highest Quality Logo",
         "Extended commercial use license",
         "Advanced customization options",
@@ -147,7 +147,4 @@ export default function PriceTable() {
       </div>
     </div>
   );
-}
-
-{
 }

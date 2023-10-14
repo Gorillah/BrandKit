@@ -28,6 +28,9 @@ import {
 import HeaderMenu from "@/components/Layouts/HeaderMenu";
 import { cn } from "@/lib/utils";
 import { checkSubscription } from "@/lib/subscription";
+import { users } from "@/drizzle/schema";
+import { db } from "@/lib/db";
+import { eq } from "drizzle-orm";
 
 const routes = [
   {
@@ -77,7 +80,14 @@ const routes = [
 export default async function Navbar() {
   const { userId } = auth();
   const isSubscribed = await checkSubscription();
-  console.log("isSubscribed", isSubscribed);
+  let credit = null;
+  if (userId) {
+    const user = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, userId!.toString()));
+    credit = user[0].credit;
+  }
   return (
     <div className="h-16 flex size-icon px-4 shadow-md bg-primary justify-between items-center">
       <div
@@ -113,6 +123,9 @@ export default async function Navbar() {
                 </Link>
               </SheetClose>
             ))}
+            {credit && (
+              <div className="mt-auto font-semibold">Credits: {credit}</div>
+            )}
           </SheetContent>
         </Sheet>
       </div>
@@ -145,7 +158,11 @@ export default async function Navbar() {
             </Link>
           </div>
         ) : (
-          <div className="relative">
+          <div className="relative flex items-center justify-center gap-3">
+            {/* lg screen view */}
+            {credit && (
+              <div className="font-semibold text-white">Credits: {credit}</div>
+            )}
             <UserButton afterSignOutUrl="/" />
             {isSubscribed && (
               <Crown
@@ -156,6 +173,7 @@ export default async function Navbar() {
           </div>
         )}
       </div>
+      {/* mobile view */}
       <div className={cn(userId ? "flex" : "hidden", "md:hidden relative")}>
         <UserButton afterSignOutUrl="/" />
         {isSubscribed && (

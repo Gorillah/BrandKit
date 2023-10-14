@@ -27,7 +27,7 @@ const Logo = ({
   companyName,
   logoPublicId,
   logoFormat,
-  isSub
+  isSub,
 }: logo & Subscription) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -62,8 +62,9 @@ const Logo = ({
   if (mutation.isLoading) {
     return <Loader2 className="animate-spin" size={40} />;
   }
+
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 shadow-md shadow-gray-400">
       {mutation.isSuccess && (
         <CldImage
           width={500}

@@ -1,49 +1,19 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React from "react";
 import FormCard from "@/components/logoForm";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import { useFormPage, useProgressBar } from "@/store/createLogo";
 
-export default function CreatePage({}) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const company = searchParams.get("company");
+import { users } from "@/drizzle/schema";
+import { db } from "@/lib/db";
+import { eq } from "drizzle-orm";
+import { auth } from "@clerk/nextjs";
 
-  const { page, setPage } = useFormPage();
-  const { progress, setProgress } = useProgressBar();
-
-  useEffect(() => {
-    setPage(0);
-    setProgress(33);
-  }, [setPage, setProgress]);
-
-  if (!company) {
-    router.push("/");
-  }
-
-  const back = function () {
-    if (page < 1) router.push("/");
-    setPage(page - 1);
-    setProgress(progress - 33.3);
-  };
-
+export default async function CreatePage() {
+  // UseCredit
+  const { userId } = auth();
+  const user = await db.select().from(users).where(eq(users.id, userId!.toString()));
+  const credit = user[0].credit;
   return (
     <div>
-      <div className="container h-20 flex items-center size-icon justify-between shadow-md mb-18">
-        <Button
-          variant={"link"}
-          onClick={() => {
-            back();
-          }}
-        >
-          <ArrowLeft />
-        </Button>
-      </div>
-      <FormCard />
+      <FormCard credit={credit} />
     </div>
   );
 }

@@ -7,7 +7,6 @@ import Advantages from "@/components/Homepage/Advantages";
 import { auth } from "@clerk/nextjs";
 
 export default function HomePage() {
-  const { userId } = auth();
   return (
     <div className="flex flex-col space-y-10 gap-4">
       <CreateLogoForm />
