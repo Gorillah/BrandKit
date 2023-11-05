@@ -1,3 +1,5 @@
+"use server";
+
 import getAllUsers from "@/lib/getAllUsers";
 import { NextResponse } from "next/server";
 
