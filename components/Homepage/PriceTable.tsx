@@ -48,7 +48,7 @@ export default function PriceTable() {
       price: Yearly ? "$8" : "$12",
       credits: 15,
       description: "1 Logo, 1 Social Media Post",
-      color: "bg-gray-200",
+      color: "bg-[#FDC649]",
       textColor: "text-black",
       features: [
         "15 Credits",
@@ -95,8 +95,8 @@ export default function PriceTable() {
   };
 
   return (
-    <div id="price" className="flex flex-col gap-4">
-      <h2 className="text-3xl text-center font-semibold">Choose Your Plan</h2>
+    <div id="price" className="flex flex-col gap-8">
+      <h2 className="text-3xl text-center font-semibold md:text-4xl">Choose Your Plan</h2>
       <div className="flex justify-center gap-4 items-center">
         <p className="text-xl text-bold">Monthly</p>
         <Switch checked={Yearly} onCheckedChange={() => setYearly(!Yearly)} />
@@ -107,22 +107,21 @@ export default function PriceTable() {
           <Card
             key={index}
             className={cn(
-              "flex flex-col justify-around shadow-md shadow-black/30",
-              plan.color,
+              "flex flex-col justify-around shadow-md shadow-black/3 bg-primary ",
               plan.textColor
             )}
           >
             <CardHeader>
-              <CardTitle className="text-5xl text-slate-950">
+              <CardTitle className="text-5xl text-white">
                 {plan.price}
                 <span className="text-sm font-light">/ Monthly</span>
               </CardTitle>
-              <CardTitle className="text-4xl text-slate-950">
+              <CardTitle className="text-4xl text-white">
                 {plan.name}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="flex flex-col gap-2 text-lg">
+              <ul className="flex flex-col gap-2 text-lg text-white">
                 {plan.features.map((feature, index) => (
                   <li key={index}>{feature}</li>
                 ))}
@@ -130,7 +129,7 @@ export default function PriceTable() {
             </CardContent>
             <CardFooter>
               <Button
-                className="w-full"
+                className="w-full bg-white text-black"
                 onClick={() =>
                   handleSubsciption(
                     plan.subscriptionPlan,

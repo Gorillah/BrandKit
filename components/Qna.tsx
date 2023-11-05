@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 
 const questions = [
@@ -47,21 +42,13 @@ const questions = [
 
 export default function Qna() {
   return (
-    <div
-      className="container text-3xl flex flex-col gap-4 text-center flex flex-col gap-8"
-      id="faq"
-    >
-      <h3 className=" font-semibold">Questions and Answers</h3>
-      <p className="text-xl">Most asked questions about BrandKit</p>
+    <div className="container text-3xl flex flex-col gap-4" id="faq">
+      <h3 className="text-center font-semibold">Questions and Answers</h3>
       {questions.map((question, index) => (
         <Accordion type="single" collapsible key={index}>
           <AccordionItem value={cn("item-" + index)}>
-            <AccordionTrigger className="text-lg text-left">
-              {question.question}
-            </AccordionTrigger>
-            <AccordionContent className="text-lg">
-              {question.answer}
-            </AccordionContent>
+            <AccordionTrigger className="text-lg text-left">{question.question}</AccordionTrigger>
+            <AccordionContent className="text-lg">{question.answer}</AccordionContent>
           </AccordionItem>
         </Accordion>
       ))}

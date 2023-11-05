@@ -28,10 +28,12 @@ import {
 import HeaderMenu from "@/components/Layouts/HeaderMenu";
 import { cn } from "@/lib/utils";
 import { checkSubscription } from "@/lib/subscription";
-import { users } from "@/drizzle/schema";
+import { userSubscriptions, users } from "@/drizzle/schema";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
+import { stripe } from "@/lib/stripe";
 
+let stripeUrl: string = "null";
 const routes = [
   {
     label: "Login",
@@ -53,7 +55,7 @@ const routes = [
   },
   {
     label: "My Subscriptions",
-    href: "/api/stripe",
+    href: stripeUrl,
     img: KanbanSquare,
     authReq: true,
   },
@@ -86,8 +88,21 @@ export default async function Navbar() {
       .select()
       .from(users)
       .where(eq(users.id, userId!.toString()));
-    credit = user[0].credit;
+    credit = user[0]?.credit;
+    const subscription = await db
+      .select()
+      .from(userSubscriptions)
+      .where(eq(userSubscriptions.userId, userId));
+    if (subscription[0]?.stripeCustomerId) {
+      const session = await stripe.billingPortal.sessions.create({
+        customer: subscription[0].stripeCustomerId,
+        return_url: `${process.env.NEXT_BASE_URL}/success`,
+      });
+
+      stripeUrl = session.url;
+    }
   }
+  console.log("stripeUrl", stripeUrl === "null");
   return (
     <div className="h-16 flex size-icon px-4 shadow-md bg-primary justify-between items-center">
       <div
@@ -112,7 +127,10 @@ export default async function Navbar() {
                   "hover:bg-gray-200 py-2 pl-1 rounded-md font-semibold border-b-2",
                   userId && route.label === "Login" ? "hidden" : "",
                   userId && route.label === "Register" ? "hidden" : "",
-                  !userId && route.authReq ? "hidden" : ""
+                  !userId && route.authReq ? "hidden" : "",
+                  route.label === "My Subscriptions" && stripeUrl === "null"
+                    ? "hidden"
+                    : "flex"
                 )}
               >
                 <Link href={route.href}>

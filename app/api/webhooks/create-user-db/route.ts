@@ -45,10 +45,12 @@ const handler = async (req: Request) => {
       credit: 2,
     });
   }
+  console.log("user added to db");
   if (eventType === "user.deleted") {
     const { id, email_addresses, ...attributes } = evt.data;
     const user = await db.select().from(users).where(eq(users.id, id));
   }
+  console.log("user deleted from db");
   return NextResponse.json("Success", { status: 200 });
 };
 

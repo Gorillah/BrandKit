@@ -8,7 +8,7 @@ import { auth } from "@clerk/nextjs";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col space-y-10 gap-4">
+    <div className="flex flex-col space-y-10 gap-8 md:gap-15">
       <CreateLogoForm />
       <LogoShowcase />
       <Advantages />

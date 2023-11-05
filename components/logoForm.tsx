@@ -137,8 +137,8 @@ export default function FormCard({ credit }: { credit: number | null }) {
   const pages = [<Style key={0} />, <Color key={1} />, <Font key={2} />];
 
   return (
-    <div>
-      <div className="container h-20 flex items-center size-icon justify-between shadow-md mb-18">
+    <div className="h-screen">
+      <div className="container h-20 flex items-center size-icon justify-between mb-18">
         <Button
           variant={"link"}
           onClick={() => {
@@ -190,7 +190,8 @@ export default function FormCard({ credit }: { credit: number | null }) {
             />
           </div>
           <p>
-            Logo generation started. Dont refresh! It can take up to 30-40 seconds
+            Logo generation started. Dont refresh! It can take up to 30-40
+            seconds
           </p>
         </div>
       )}
